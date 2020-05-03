@@ -1,0 +1,207 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="3dp"
+    android:gravity="center"
+    >
+        <LinearLayout
+            android:id="@+id/user_details_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="visible"
+            android:layout_gravity="center"
+            android:layout_centerInParent="true"
+
+            >
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/profile"
+                />
+
+
+
+                <EditText
+                    android:id="@+id/f_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="7dp"
+                    android:layout_marginRight="7dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/editext"
+                    android:hint="שם פרטי"
+                    android:editable="false"
+                    android:paddingRight="2dp"
+                    android:paddingLeft="3dp"
+                    android:textColor="@color/black"
+                    android:textSize="13sp"/>
+
+
+                <EditText
+                    android:id="@+id/l_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="7dp"
+                    android:layout_marginRight="7dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:paddingLeft="3dp"
+                    android:background="@drawable/editext"
+                    android:hint="שם משפחה"
+                    android:editable="false"
+                    android:paddingRight="2dp"
+                    android:textColor="@color/black"
+                    android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/phone"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="7dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/editext"
+                android:hint="מספר טלפון"
+                android:paddingLeft="3dp"
+                android:paddingRight="2dp"
+                android:editable="false"
+                android:textColor="@color/black"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/tz"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="7dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/editext"
+                android:hint="מס תעודת זהות"
+                android:paddingLeft="3dp"
+                android:editable="false"
+                android:paddingRight="2dp"
+                android:textColor="@color/black"
+                android:textSize="13sp" />
+
+            <LinearLayout
+                android:id="@+id/address_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                    <EditText
+                        android:id="@+id/city"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="7dp"
+                        android:layout_marginRight="7dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/editext"
+                        android:hint="עיר"
+                        android:paddingLeft="3dp"
+                        android:paddingRight="2dp"
+                        android:editable="false"
+                        android:textColor="@color/black"
+                        android:textSize="13sp" />
+
+                    <EditText
+                        android:id="@+id/street"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="7dp"
+                        android:layout_marginRight="7dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/editext"
+                        android:hint="רחוב"
+                        android:paddingLeft="3dp"
+                        android:editable="false"
+                        android:paddingRight="2dp"
+                        android:textColor="@color/black"
+                        android:textSize="13sp" />
+
+
+                    <EditText
+                        android:id="@+id/apartment_num"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="7dp"
+                        android:layout_marginRight="7dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/editext"
+                        android:hint="דירה"
+                        android:paddingLeft="3dp"
+                        android:editable="false"
+                        android:paddingRight="2dp"
+                        android:textColor="@color/black"
+
+                        android:textSize="13sp" />
+
+                    <EditText
+                        android:id="@+id/home_num"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="7dp"
+                        android:layout_marginRight="7dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/editext"
+                        android:hint="מספר בית"
+                        android:paddingLeft="3dp"
+                        android:paddingRight="2dp"
+                        android:textColor="@color/black"
+                        android:editable="false"
+                        android:textSize="13sp" />
+                </LinearLayout>
+
+
+
+                <EditText
+                    android:id="@+id/email"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="7dp"
+                    android:layout_marginRight="7dp"
+                    android:layout_marginTop="10dp"
+                    android:paddingLeft="3dp"
+                    android:background="@drawable/editext"
+                    android:hint="כתובת דואר אלקטרונית"
+                    android:paddingRight="2dp"
+                    android:editable="false"
+                    android:textColor="@color/black"
+                    android:textSize="13sp" />
+
+
+            </LinearLayout>
+
+            <!--<View-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1dp"-->
+                <!--android:layout_marginTop="7dp"-->
+                <!--android:background="@color/white" />-->
+
+    <TextView
+        android:id="@+id/log_out"
+        android:layout_width="150dp"
+        android:layout_height="35dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/go_shape"
+        android:gravity="center"
+        android:text="היתנתק"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"
+        android:textColor="@color/white"
+        android:textSize="13dp"
+        android:textStyle="bold" />
+
+</RelativeLayout>

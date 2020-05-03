@@ -1,0 +1,130 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    tools:context="com.bringit.orders.fragments.LogInFragment">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/user_details_layout"
+        android:visibility="visible"
+
+        android:background="@drawable/dialog_background"
+        >
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/red"
+            android:visibility="gone"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="13dp"
+                android:id="@+id/address"
+                android:textStyle="bold"
+                android:text="משתמש קיים"
+                android:layout_gravity="center"
+                />
+        </FrameLayout>
+
+
+        <EditText
+            android:id="@+id/phone"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="@drawable/editext"
+            android:layout_gravity="center"
+            android:hint="מספר טלפון"
+            android:inputType="number"
+            android:gravity="center"
+            android:layout_marginTop="48dp"
+            android:textColor="@color/black"
+            android:layout_marginRight="37dp"
+            android:layout_marginLeft="37dp"
+            android:paddingRight="2dp"
+
+            android:textSize="13sp" />
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="@drawable/editext"
+            android:layout_gravity="center"
+            android:hint="סיסמה"
+            android:gravity="center"
+            android:layout_marginTop="18dp"
+            android:textColor="@color/black"
+            android:layout_marginRight="37dp"
+            android:layout_marginLeft="37dp"
+            android:paddingRight="2dp"
+            android:paddingLeft="2dp"
+            android:layout_marginBottom="38dp"
+            android:textSize="13sp" />
+
+        <TextView
+            android:layout_width="150dp"
+            android:layout_weight="1"
+            android:layout_height="35dp"
+            android:id="@+id/go"
+            android:layout_margin="10dp"
+            android:textSize="13dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/go_shape"
+            android:gravity="center"
+            android:text="G O"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:layout_marginBottom="35dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="משתמש חדש?"
+            android:textColor="@color/red"
+            android:layout_margin="10dp"
+            android:id="@+id/new_user"
+            android:textSize="15dp"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:visibility="gone"
+        android:id="@+id/connection_layout"
+        android:background="@color/white"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:gravity="center"
+            android:background="@color/red"
+            android:layout_margin="5dp"
+            android:text="TEST"
+            android:id="@+id/test"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:background="@color/green"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:text="PRODUCTION"
+            android:id="@+id/production"
+            />
+
+    </LinearLayout>
+
+</FrameLayout>

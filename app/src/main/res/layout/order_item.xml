@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="10dp"
+    android:id="@+id/main_layout"
+    android:layoutDirection="ltr"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        >
+
+        <!--<ImageView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:src="@mipmap/redcircle14"-->
+        <!--android:layout_marginTop="5dp"-->
+        <!--android:layout_marginBottom="5dp"-->
+        <!--android:layout_gravity="center_vertical"-->
+        <!--android:layout_marginLeft="4dp"-->
+        <!--android:id="@+id/topping_image"-->
+        <!--/>-->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="nape "
+            android:textColor="@color/black"
+            android:gravity="right"
+            android:textSize="14dp"
+            android:id="@+id/name"
+            android:layout_weight="1"
+
+            />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/topping_image"
+            android:gravity="center_vertical"
+            android:layout_margin="12dp"
+            >
+            <include layout="@layout/cart_topping_item"/>
+            <!--<ImageView-->
+            <!--android:id="@+id/allPizza"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="5dp"-->
+            <!--android:src="@mipmap/pizzatomark7big" />-->
+
+            <!--<include layout="@layout/pizza_slices2"/>-->
+            <!--<include layout="@layout/pizza_slices4"/>-->
+        </RelativeLayout>
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/recycler_view"
+
+        />
+
+
+</LinearLayout>

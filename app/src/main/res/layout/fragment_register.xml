@@ -1,0 +1,496 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="3dp"
+    android:gravity="center"
+    >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="8dp"
+        android:visibility="visible"
+
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:id="@+id/user_details_layout"
+            android:visibility="visible"
+            android:padding="8dp"
+            android:background="@drawable/dialog_background"
+            >
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:background="@color/red"
+            android:visibility="invisible"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="13dp"
+                android:id="@+id/address"
+                android:textStyle="bold"
+                android:text="הרשמה"
+                android:layout_gravity="center"
+                />
+        </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="7dp"
+                android:layout_marginLeft="7dp"
+                >
+
+                <EditText
+                    android:hint="שם פרטי"
+                    android:id="@+id/f_name"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/editext"
+                    android:layout_weight="1"
+                    android:layout_marginRight="2dp"
+                    android:layout_marginLeft="2dp"
+                    android:paddingLeft="3dp"
+                    android:paddingRight="2dp"
+                    android:textColor="@color/black"
+                    android:textSize="13sp" />
+
+
+                <EditText
+                    android:id="@+id/l_name"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/editext"
+                    android:hint="שם משפחה"
+                    android:paddingLeft="3dp"
+                    android:layout_weight="1"
+                    android:layout_marginRight="2dp"
+                    android:layout_marginLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:textColor="@color/black"
+                    android:textSize="13sp"
+                    />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/phone"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="@drawable/editext"
+                android:layout_gravity="center"
+                android:hint="מספר טלפון"
+                android:paddingLeft="3dp"
+                android:inputType="number"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/black"
+                android:layout_marginRight="7dp"
+                android:layout_marginLeft="7dp"
+                android:paddingRight="2dp"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/tz"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="@drawable/editext"
+                android:layout_gravity="center"
+                android:hint="מס תעודת זהות"
+                android:inputType="number"
+                android:paddingLeft="3dp"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/black"
+                android:layout_marginRight="7dp"
+                android:layout_marginLeft="7dp"
+                android:paddingRight="2dp"
+                android:textSize="13sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/address_layout"
+                android:orientation="vertical"
+                android:layout_marginRight="7dp"
+                android:layout_marginLeft="7dp"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8dp"
+
+                    >
+
+                    <EditText
+                        android:id="@+id/city"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:background="@drawable/editext"
+                        android:layout_weight="1"
+                        android:hint="עיר"
+                        android:paddingLeft="3dp"
+                        android:layout_marginRight="2dp"
+                        android:layout_marginLeft="2dp"
+                        android:paddingRight="2dp"
+                        android:textColor="@color/black"
+                        android:textSize="13sp" />
+
+                    <EditText
+                        android:id="@+id/street"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:background="@drawable/editext"
+                        android:layout_weight="1"
+                        android:hint="רחוב"
+                        android:paddingLeft="3dp"
+                        android:layout_marginRight="2dp"
+                        android:layout_marginLeft="2dp"
+                        android:paddingRight="2dp"
+                        android:textColor="@color/black"
+                        android:textSize="13sp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8dp"
+                    >
+
+                    <EditText
+                        android:id="@+id/apartment_num"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:background="@drawable/editext"
+                        android:layout_weight="1"
+                        android:hint="דירה"
+                        android:inputType="number"
+                        android:paddingLeft="3dp"
+                        android:textColor="@color/black"
+                        android:layout_marginRight="2dp"
+                        android:layout_marginLeft="2dp"
+                        android:paddingRight="2dp"
+
+                        android:textSize="13sp" />
+
+                    <EditText
+                        android:id="@+id/home_num"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:background="@drawable/editext"
+                        android:layout_weight="1"
+                        android:hint="מספר בית"
+                        android:paddingLeft="3dp"
+                        android:layout_marginRight="2dp"
+                        android:layout_marginLeft="2dp"
+                        android:textColor="@color/black"
+                        android:paddingRight="2dp"
+
+                        android:textSize="13sp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8dp"
+                    >
+
+                    <EditText
+                        android:hint="סיסמה"
+                        android:id="@+id/pass"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:background="@drawable/editext"
+                        android:layout_weight="1"
+                        android:layout_marginRight="2dp"
+                        android:layout_marginLeft="2dp"
+                        android:paddingLeft="3dp"
+                        android:paddingRight="2dp"
+                        android:textColor="@color/black"
+                        android:textSize="13sp" />
+
+
+                    <EditText
+                        android:id="@+id/confirm_pass"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:background="@drawable/editext"
+                        android:hint="אימות סיסמה"
+                        android:layout_weight="1"
+                        android:layout_marginRight="2dp"
+                        android:layout_marginLeft="2dp"
+                        android:paddingLeft="3dp"
+                        android:paddingRight="2dp"
+                        android:textColor="@color/black"
+                        android:textSize="13sp"
+                        />
+                </LinearLayout>
+                <EditText
+                    android:id="@+id/email"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:background="@drawable/editext"
+                    android:layout_gravity="center"
+                    android:hint="כתובת דואר אלקטרונית"
+                    android:inputType="textEmailAddress"
+                    android:layout_marginTop="8dp"
+                    android:textColor="@color/black"
+                    android:layout_marginRight="2dp"
+                    android:layout_marginLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:paddingLeft="3dp"
+                    android:textSize="13sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8dp"
+
+                    >
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1"
+                    >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@mipmap/camera1"
+                        android:id="@+id/take_pic_tz"
+                        android:layout_gravity="center_horizontal"
+                        />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="תעודה מזהה"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="4dp"
+                            />
+                    </LinearLayout>
+                    <ImageView
+                        android:id="@+id/pic_tz"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:scaleType="fitCenter"
+                         />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/take_pic_self"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@mipmap/camera2" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="סלפי"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="4dp"
+                        />
+                    </LinearLayout>
+                    <ImageView
+                        android:id="@+id/pic_self"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:scaleType="fitCenter"
+                         />
+
+                </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/white"
+                android:layout_marginTop="7dp"
+                />
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <CheckBox
+                    android:id="@+id/check"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="6dp"
+                    android:layout_marginRight="6dp"
+                    android:shadowColor="@color/black"
+                    android:buttonTint="@color/black"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="מסכים "
+                    android:id="@+id/txt1"
+                    android:textSize="13dp"
+                    android:textColor="@color/black"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="לתנאי השימוש "
+                    android:id="@+id/condition"
+                    android:textSize="13dp"
+
+                    android:textColor="@color/red"
+                    />
+            </LinearLayout>
+
+
+                <TextView
+                    android:layout_width="150dp"
+                    android:layout_weight="1"
+                    android:layout_height="35dp"
+                    android:id="@+id/go"
+                    android:layout_margin="10dp"
+                    android:textSize="13dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/go_shape"
+                    android:gravity="center"
+                    android:text="G O"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="15dp"
+                    />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="משתמש קיים?"
+                android:textColor="@color/red"
+                android:layout_margin="10dp"
+                android:id="@+id/exist_user"
+                android:textSize="15dp"
+                />
+
+        </LinearLayout>
+
+    </ScrollView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/dialog_background"
+        android:id="@+id/confirm_number_layout"
+        android:visibility="gone"
+        android:padding="25dp"
+        android:layout_marginTop="38dp"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="אימות מספר טלפון"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:textColor="@color/black"
+            android:textSize="13sp"
+            android:gravity="center|top"
+            android:text="הודעת טקסט נשלחה........."
+            android:paddingTop="35dp"
+            android:layout_marginBottom="40dp"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="קוד אימות"
+            android:textColor="@color/black"
+            android:textSize="17sp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:id="@+id/txt2"
+            android:layout_marginBottom="20dp"
+
+            />
+        <EditText
+            android:layout_width="100dp"
+            android:textSize="12sp"
+            android:textColor="@color/black"
+            android:id="@+id/confirm_num"
+            android:layout_gravity="center"
+            android:hint="קוד אימות"
+            android:background="@drawable/editext"
+            android:gravity="center"
+            android:layout_marginBottom="15dp"
+            android:layout_height="30dp"  />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="שדה חובה"
+            android:gravity="center"
+            android:textSize="12dp"
+            android:textStyle="bold"
+            android:id="@+id/txt3"
+            android:textColor="@color/red"
+            />
+
+        <TextView
+            android:id="@+id/confirm_btn"
+            android:layout_width="140dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/go_shape"
+            android:gravity="center"
+            android:text="אמת מספר"
+            android:textColor="@color/white"
+            android:textSize="13dp"
+            android:visibility="visible"
+
+            />
+
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>

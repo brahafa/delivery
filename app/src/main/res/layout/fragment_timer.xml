@@ -1,0 +1,65 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context="com.bringit.orders.fragments.TimerFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+
+        android:gravity="center"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:text="תחילת עבודה: "
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:textColor="@color/black" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:text="00/00/00 "
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:id="@+id/date"
+            />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:id="@+id/text3"
+        android:textStyle="bold"
+        android:textSize="14sp"
+        android:textColor="@color/white"
+        android:background="@drawable/timer"
+        android:text="00:00:00"
+        android:layout_marginTop="30dp"
+
+        />
+
+    <TextView
+        android:layout_width="220dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textSize="14sp"
+        android:textColor="@color/white"
+        android:background="@color/red"
+        android:id="@+id/button"
+        android:layout_marginTop="30dp"
+        android:text="התחל יום עבודה" />
+
+</LinearLayout>

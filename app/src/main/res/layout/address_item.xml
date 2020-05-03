@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp"
+
+    android:id="@+id/main_layout"
+    >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="date date"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textSize="13dp"
+        android:visibility="visible"
+        android:id="@+id/global_date"
+        android:layout_marginBottom="2dp"
+        android:layout_marginTop="2dp"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="5dp"
+
+        >
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@mipmap/call"
+            android:id="@+id/call"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="5dp"
+            android:layout_weight="1"
+            android:background="@color/green"
+            >
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="@color/white"
+            android:gravity="right"
+            android:textSize="14dp"
+            android:id="@+id/address"
+            android:layout_weight="1"
+
+            />
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@mipmap/waze"
+            android:id="@+id/waze"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            />
+
+    </LinearLayout>
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="vertical"-->
+        <!--android:id="@+id/openLayout"-->
+        <!--android:paddingRight="5dp"-->
+        <!--android:visibility="visible"-->
+        <!--&gt;-->
+    <!--<TextView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/name"-->
+        <!--android:gravity="right"-->
+        <!--android:textColor="@color/black"-->
+        <!--android:text="mmmmmm"-->
+        <!--android:layout_marginTop="4dp"-->
+
+
+        <!--/>-->
+    <!--<TextView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/phone"-->
+        <!--android:gravity="right"-->
+        <!--android:text="mmmmmm"-->
+        <!--android:layout_marginTop="4dp"-->
+        <!--android:layout_marginBottom="4dp"-->
+        <!--android:textColor="@color/black"-->
+
+        <!--/>-->
+    <!--<android.support.v7.widget.RecyclerView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/order_rv"-->
+        <!--android:paddingRight="5dp"-->
+
+        <!--/>-->
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="horizontal"-->
+            <!--&gt;-->
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:id="@+id/confirm_order_delivering"-->
+                <!--android:gravity="center"-->
+                <!--android:text="המסירה הושלמה"-->
+                <!--android:background="@color/red"-->
+                <!--android:layout_weight="1"-->
+                <!--android:layout_marginTop="4dp"-->
+                <!--android:layout_marginLeft="4dp"-->
+                <!--android:layout_marginBottom="6dp"-->
+                <!--android:textColor="@color/white"-->
+                <!--/>-->
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/pay"-->
+            <!--android:gravity="right"-->
+            <!--android:text="mmmmmm"-->
+            <!--android:layout_weight="1"-->
+            <!--android:layout_marginTop="4dp"-->
+            <!--android:layout_marginBottom="6dp"-->
+            <!--android:textColor="@color/red"-->
+            <!--/>-->
+
+        <!--</LinearLayout>-->
+
+    <!--</LinearLayout>-->
+
+</LinearLayout>
