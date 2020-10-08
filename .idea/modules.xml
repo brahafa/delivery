@@ -5,6 +5,8 @@
       <module fileurl="file://$PROJECT_DIR$/Order.iml" filepath="$PROJECT_DIR$/Order.iml" group="Order" />
       <module fileurl="file://$PROJECT_DIR$/Orders.iml" filepath="$PROJECT_DIR$/Orders.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="Order/app" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/delivery.iml" filepath="$PROJECT_DIR$/.idea/modules/delivery.iml" group="delivery" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/delivery-app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/delivery-app.iml" group="delivery/app" />
     </modules>
   </component>
 </project>
