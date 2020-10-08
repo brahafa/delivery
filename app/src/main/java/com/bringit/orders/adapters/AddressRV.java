@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,16 +14,17 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bringit.orders.R;
+import com.bringit.orders.activities.MainActivity;
+import com.bringit.orders.models.Address;
+import com.bringit.orders.utils.Constants;
+
+import java.util.List;
+
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.bringit.orders.MainActivity;
-import com.bringit.orders.R;
-import com.bringit.orders.models.Address;
-import com.bringit.orders.utils.Constants;
-import java.util.List;
 
 import static java.lang.String.format;
 

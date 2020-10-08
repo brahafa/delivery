@@ -1,14 +1,13 @@
 package com.bringit.orders.fragments;
 
-import android.app.Fragment;
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.bringit.orders.R;
+
+import androidx.fragment.app.Fragment;
 
 
 public class ContactUsFragment extends Fragment {

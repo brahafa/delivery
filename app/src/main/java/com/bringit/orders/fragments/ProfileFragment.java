@@ -1,6 +1,5 @@
 package com.bringit.orders.fragments;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,10 +9,13 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.bringit.orders.MainActivity;
+import com.bringit.orders.activities.MainActivity;
 import com.bringit.orders.R;
 import com.bringit.orders.utils.Constants;
-import com.bringit.orders.utils.SharePref;
+
+import androidx.fragment.app.Fragment;
+
+import static com.bringit.orders.utils.SharedPrefs.getData;
 
 public class ProfileFragment extends Fragment {
     private EditText street, city, homeNum, apartmentNum, pass,confirmPass, email,  fName, lName, phone, tz, confirm_num;
@@ -71,37 +73,37 @@ public class ProfileFragment extends Fragment {
 
     }
     private void initDataFromPref() {
-        if(SharePref.getInstance(getActivity()).getData(Constants.F_NAME_PREF)!=null){
-            fName.setText(SharePref.getInstance(getActivity()).getData(Constants.F_NAME_PREF));
+        if(getData(Constants.F_NAME_PREF)!=null){
+            fName.setText(getData(Constants.F_NAME_PREF));
         }
-        if(SharePref.getInstance(getActivity()).getData(Constants.L_NAME_PREF)!=null){
-            lName.setText(SharePref.getInstance(getActivity()).getData(Constants.L_NAME_PREF));
+        if(getData(Constants.L_NAME_PREF)!=null){
+            lName.setText(getData(Constants.L_NAME_PREF));
         }
-        if(SharePref.getInstance(getActivity()).getData(Constants.PHONE_PREF)!=null){
-            phone.setText(SharePref.getInstance(getActivity()).getData(Constants.PHONE_PREF));
+        if(getData(Constants.PHONE_PREF)!=null){
+            phone.setText(getData(Constants.PHONE_PREF));
         }
-        if(SharePref.getInstance(getActivity()).getData(Constants.STREET)!=null){
-            street.setText(SharePref.getInstance(getActivity()).getData(Constants.STREET));
+        if(getData(Constants.STREET)!=null){
+            street.setText(getData(Constants.STREET));
         }
-        if(SharePref.getInstance(getActivity()).getData(Constants.CITY)!=null){
-            city.setText(SharePref.getInstance(getActivity()).getData(Constants.CITY));
-        }
-
-        if(SharePref.getInstance(getActivity()).getData(Constants.HOME)!=null){
-            homeNum.setText(SharePref.getInstance(getActivity()).getData(Constants.HOME));
+        if(getData(Constants.CITY)!=null){
+            city.setText(getData(Constants.CITY));
         }
 
-        if(SharePref.getInstance(getActivity()).getData(Constants.ENTER)!=null){
-            apartmentNum.setText(SharePref.getInstance(getActivity()).getData(Constants.ENTER));
+        if(getData(Constants.HOME)!=null){
+            homeNum.setText(getData(Constants.HOME));
         }
-//        if(SharePref.getInstance(getActivity()).getData(Constants.PASS_PREF)!=null){
-//            pass.setText(SharePref.getInstance(getActivity()).getData(Constants.PASS_PREF));
+
+        if(getData(Constants.ENTER)!=null){
+            apartmentNum.setText(getData(Constants.ENTER));
+        }
+//        if(getData(Constants.PASS_PREF)!=null){
+//            pass.setText(getData(Constants.PASS_PREF));
 //        }
-        if(SharePref.getInstance(getActivity()).getData(Constants.EMAIL_PREF)!=null){
-            email.setText(SharePref.getInstance(getActivity()).getData(Constants.EMAIL_PREF));
+        if(getData(Constants.EMAIL_PREF)!=null){
+            email.setText(getData(Constants.EMAIL_PREF));
         }
-        if(SharePref.getInstance(getActivity()).getData(Constants.T_Z)!=null){
-            tz.setText(SharePref.getInstance(getActivity()).getData(Constants.T_Z));
+        if(getData(Constants.T_Z)!=null){
+            tz.setText(getData(Constants.T_Z));
         }
     }
 

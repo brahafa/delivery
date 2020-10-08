@@ -1,4 +1,4 @@
-package com.bringit.orders.utils;
+package com.bringit.orders.services;
 
 import android.Manifest;
 import android.app.Service;
@@ -14,10 +14,13 @@ import android.os.IBinder;
 import android.util.Log;
 import android.widget.Toast;
 
-import androidx.core.app.ActivityCompat;
-
+import com.bringit.orders.utils.Constants;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import androidx.core.app.ActivityCompat;
+
+import static com.bringit.orders.utils.SharedPrefs.getData;
 
 public class MyLocationService extends Service {
     public static final String BROADCAST_ACTION = "Hello World";
@@ -30,6 +33,7 @@ public class MyLocationService extends Service {
     int counter = 0;
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -128,6 +132,7 @@ public class MyLocationService extends Service {
         t.start();
         return t;
     }
+
     private void sendLocation(final Location location) {
 
         final Handler handler = new Handler();
@@ -135,12 +140,12 @@ public class MyLocationService extends Service {
 
         //    @Override
         //    public void run() {
-        myRef = database.getReference(SharePref.getInstance(getApplicationContext()).getData(Constants.ID_PREF)).child("latitude");
+        myRef = database.getReference(getData(Constants.ID_PREF)).child("latitude");
         //  test1=test1*2;
         myRef.setValue(location.getLatitude());
         //  myRef.setValue(test1);
         Log.d("lat", myRef.toString());
-        myRef = database.getReference(SharePref.getInstance(getApplicationContext()).getData(Constants.ID_PREF)).child("longitude");
+        myRef = database.getReference(getData(Constants.ID_PREF)).child("longitude");
 
         //  myRef = database.getReference("id").child("longitude");
         //  test1=test1*3;
@@ -151,8 +156,6 @@ public class MyLocationService extends Service {
         // endLocation();
         //   }
         //     }, 5000);
-
-
 
 
     }

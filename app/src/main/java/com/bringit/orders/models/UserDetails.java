@@ -1,4 +1,4 @@
-package com.bringit.orders.utils;
+package com.bringit.orders.models;
 
 /**
  * Created by User on 03/04/2018.

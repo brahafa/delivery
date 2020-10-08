@@ -1,4 +1,4 @@
-package com.bringit.orders;
+package com.bringit.orders.services;
 
 
 import android.app.Notification;
@@ -18,14 +18,15 @@ import android.os.IBinder;
 import android.util.Log;
 import android.widget.Toast;
 
-import androidx.core.app.NotificationCompat;
-
+import com.bringit.orders.R;
 import com.bringit.orders.utils.Constants;
-import com.bringit.orders.utils.SharePref;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import androidx.core.app.NotificationCompat;
+
 import static android.content.ContentValues.TAG;
+import static com.bringit.orders.utils.SharedPrefs.getData;
 
 
 public class MyForeGroundService extends Service {
@@ -112,10 +113,10 @@ public class MyForeGroundService extends Service {
 
     private void sendLocation(final Location location) {
 
-        myRef = database.getReference(SharePref.getInstance(getApplicationContext()).getData(Constants.ID_PREF)).child("latitude");
+        myRef = database.getReference(getData(Constants.ID_PREF)).child("latitude");
         myRef.setValue(location.getLatitude());
         Log.d("lat", myRef.toString());
-        myRef = database.getReference(SharePref.getInstance(getApplicationContext()).getData(Constants.ID_PREF)).child("longitude");
+        myRef = database.getReference(getData(Constants.ID_PREF)).child("longitude");
         Log.d("long", myRef.toString());
         myRef.setValue(location.getLongitude());
 

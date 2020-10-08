@@ -1,12 +1,13 @@
-package com.bringit.orders;
+package com.bringit.orders.activities;
 
 import android.content.Intent;
-import android.os.Handler;
 import android.os.Bundle;
+import android.os.Handler;
+
+import com.bringit.orders.R;
+import com.wang.avi.AVLoadingIndicatorView;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.wang.avi.AVLoadingIndicatorView;
 
 public class SplashActivity extends AppCompatActivity {
     private AVLoadingIndicatorView loader;
@@ -19,12 +20,7 @@ public class SplashActivity extends AppCompatActivity {
         loader=(AVLoadingIndicatorView)findViewById(R.id.LoadingIndicatorView);
         loader.smoothToShow();
         Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            public void run() {
-                openMainActivity();
-
-            }
-        }, 3000);   //5 seconds
+        handler.postDelayed(() -> openMainActivity(), 3000);   //5 seconds
 
         //clearCart();
     }

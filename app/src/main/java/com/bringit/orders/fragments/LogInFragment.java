@@ -1,29 +1,20 @@
 package com.bringit.orders.fragments;
 
-import android.app.Fragment;
-import android.content.Intent;
-import android.os.Build;
+import android.content.Context;
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.bringit.orders.MainActivity;
-import com.bringit.orders.MyForeGroundService;
+import com.bringit.orders.activities.MainActivity;
 import com.bringit.orders.R;
-import com.bringit.orders.utils.Constants;
-import com.bringit.orders.utils.Network;
-import com.bringit.orders.utils.SharePref;
+import com.bringit.orders.network.Request;
 import com.google.firebase.FirebaseApp;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import androidx.fragment.app.Fragment;
 
 public class LogInFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
@@ -34,11 +25,13 @@ public class LogInFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    int test1=1;
+    int test1 = 1;
     private View view;
     private TextView newUser, go, test, production;
     private EditText phone, password;
     private LinearLayout user_details_layout, connection_layout;
+    private Context mContext;
+
     public LogInFragment() {
         // Required empty public constructor
     }
@@ -85,8 +78,6 @@ public class LogInFragment extends Fragment {
         user_details_layout = view.findViewById(R.id.user_details_layout);
         connection_layout = view.findViewById(R.id.connection_layout);
 
-
-
 //        Button startServiceButton = (Button)view. findViewById(R.id.start_foreground_service_button);
 //        startServiceButton.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -107,86 +98,28 @@ public class LogInFragment extends Fragment {
 //            }
 //        });
 
-        go.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-            logIn();
-            }
-        });
+        go.setOnClickListener(v -> Request.getInstance().logIn(mContext, phone.getText().toString(), password.getText().toString(),
+                isDataSuccess -> {
+                    if (isDataSuccess) {
+                        ((MainActivity) getActivity()).openNewFragment(new TimerFragment(), "");
+                    }
+                }));
         FirebaseApp.initializeApp(getActivity());
 
 
-
-        user_details_layout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
+        user_details_layout.setOnClickListener(view -> {
         });
 
-        newUser.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                ((MainActivity)getActivity()).openNewFragment(new RegisterFragment(),"");
-            }
-        });
-        ((MainActivity)getActivity()).setTitle("כניסת משתמש");
-        ((MainActivity)getActivity()).setBottomNavigationVisibility(8);
+        newUser.setOnClickListener(v -> ((MainActivity) getActivity()).openNewFragment(new RegisterFragment(), ""));
+        ((MainActivity) getActivity()).setTitle("כניסת משתמש");
+        ((MainActivity) getActivity()).setBottomNavigationVisibility(8);
 
         return view;
     }
 
-
-
-    private void logIn() {
-            JSONObject data = new JSONObject();
-
-            try {
-                data.put("phone",phone.getText().toString());
-                data.put("password",password.getText().toString());
-
-                Log.d("PARAMS", data.toString());
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            Network network = new Network(new Network.NetworkCallBack() {
-                @Override
-                public void onDataDone(Network.RequestName requestName, JSONObject json) {
-                    Log.d("LOG_IN", json.toString());
-                    try {
-
-                        if(json.getBoolean("status")){
-                            Constants.saveLoggedIn(getActivity(),json.getString("utoken"),(json.getJSONObject("user")).getString("id") );
-                            ((MainActivity)getActivity()).openNewFragment(new TimerFragment(),"");
-                            initPref(json.getJSONObject("user"));
-                        }else{
-                            Constants.openAlertDialog(getActivity(),"", json.getString("message"));
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
-                }
-            },getActivity());
-            network.sendPostRequest(getActivity(), data, Network.RequestName.LOG_IN);
-
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mContext = context;
     }
-
-    private void initPref(JSONObject user) {
-        try {
-        SharePref.getInstance(getActivity()).saveData(Constants.F_NAME_PREF, user.getString("name"));
-       // SharePref.getInstance(getActivity()).saveData(Constants.L_NAME_PREF, lName.getText().toString());
-        SharePref.getInstance(getActivity()).saveData(Constants.PHONE_PREF, user.getString("phone"));
-        SharePref.getInstance(getActivity()).saveData(Constants.EMAIL_PREF,user.getString("email"));
-        SharePref.getInstance(getActivity()).saveData(Constants.PASS_PREF, password.getText().toString());
-
-        SharePref.getInstance(getActivity()).saveData(Constants.STREET, user.getJSONObject("address").getString("street"));
-        SharePref.getInstance(getActivity()).saveData(Constants.CITY,  user.getJSONObject("address").getString("city"));
-        SharePref.getInstance(getActivity()).saveData(Constants.HOME, user.getJSONObject("address").getString("houseNumber"));
-        SharePref.getInstance(getActivity()).saveData(Constants.ENTER,  user.getJSONObject("address").getString("apartment"));
-        SharePref.getInstance(getActivity()).saveData(Constants.T_Z, user.getString("id"));
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
-
 }

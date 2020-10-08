@@ -17,15 +17,17 @@ import android.view.animation.TranslateAnimation;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 
-import com.bringit.orders.MainActivity;
+import com.bringit.orders.activities.MainActivity;
 import com.bringit.orders.fragments.LogInFragment;
+import com.bringit.orders.models.UserDetails;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
 import java.util.Calendar;
 import java.util.Date;
+
+import static com.bringit.orders.utils.SharedPrefs.saveData;
 
 /**
  * Created by User on 22/03/2018.
@@ -75,27 +77,27 @@ public class Constants {
     }
 
 
-    public static void saveLoggedIn(Context context ,String token, String id){
+    public static void saveLoggedIn(String token, String id){
         UserDetails.getInstance().setToken(token);
-        SharePref.getInstance(context).saveData(Constants.TOKEN_PREF, token);
-        SharePref.getInstance(context).saveData(Constants.ID_PREF, id);
-        SharePref.getInstance(context).saveData(Constants.IS_LOGGED_PREF, "true");
+       saveData(Constants.TOKEN_PREF, token);
+       saveData(Constants.ID_PREF, id);
+       saveData(Constants.IS_LOGGED_PREF, "true");
     }
 
     public static void logOut(Context context){
-        SharePref.getInstance(context).saveData(Constants.TOKEN_PREF, "");
-        SharePref.getInstance(context).saveData(Constants.IS_LOGGED_PREF, "false");
-        SharePref.getInstance(context).saveData(Constants.F_NAME_PREF, "");
-        SharePref.getInstance(context).saveData(Constants.L_NAME_PREF,"");
-        SharePref.getInstance(context).saveData(Constants.PHONE_PREF, "");
-        SharePref.getInstance(context).saveData(Constants.EMAIL_PREF,"");
-        SharePref.getInstance(context).saveData(Constants.PASS_PREF, "");
+        saveData(Constants.TOKEN_PREF, "");
+        saveData(Constants.IS_LOGGED_PREF, "false");
+        saveData(Constants.F_NAME_PREF, "");
+        saveData(Constants.L_NAME_PREF,"");
+        saveData(Constants.PHONE_PREF, "");
+        saveData(Constants.EMAIL_PREF,"");
+        saveData(Constants.PASS_PREF, "");
 
-        SharePref.getInstance(context).saveData(Constants.STREET, "");
-        SharePref.getInstance(context).saveData(Constants.CITY, "");
-        SharePref.getInstance(context).saveData(Constants.HOME, "");
-        SharePref.getInstance(context).saveData(Constants.ENTER,"");
-        SharePref.getInstance(context).saveData(Constants.T_Z, "");
+        saveData(Constants.STREET, "");
+        saveData(Constants.CITY, "");
+        saveData(Constants.HOME, "");
+        saveData(Constants.ENTER,"");
+        saveData(Constants.T_Z, "");
         ((MainActivity)context).openNewFragment(new LogInFragment(),"");
     }
 
