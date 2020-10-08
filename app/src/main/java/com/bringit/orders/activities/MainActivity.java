@@ -3,63 +3,57 @@ package com.bringit.orders.activities;
 import android.app.FragmentManager;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.bringit.orders.R;
+import com.bringit.orders.databinding.ActivityMainBinding;
 import com.bringit.orders.fragments.ContactUsFragment;
 import com.bringit.orders.fragments.CurrentFragment;
-import com.bringit.orders.fragments.LogInFragment;
 import com.bringit.orders.fragments.ProfileFragment;
-import com.bringit.orders.fragments.TimerFragment;
 import com.bringit.orders.utils.Constants;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.NavController;
+import androidx.navigation.NavGraph;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
 
-import static com.bringit.orders.utils.SharedPrefs.getData;
+import static com.bringit.orders.utils.SharedPrefs.getBooleanData;
 
 
 public class MainActivity extends AppCompatActivity {
 
-    LinearLayout menuContent;
-    ImageView toggl;
+    private ActivityMainBinding binding;
+    private NavController navController;
+
     private RelativeLayout profile_menu, logout_menu, contact_menu;
-    TextView title;
-    LinearLayout bottom_navigation;
     CurrentFragment currentFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        menuContent = (LinearLayout) findViewById(R.id.menu_content);
-        toggl = (ImageView) findViewById(R.id.toggl);
+        setupBottomNav();
+
+        navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
+            binding.tvTitle.setText(destination.getLabel());
+        });
+
         profile_menu = (RelativeLayout) findViewById(R.id.profile_menu);
         logout_menu = (RelativeLayout) findViewById(R.id.logout_menu);
         contact_menu = (RelativeLayout) findViewById(R.id.contact_menu);
-        title = (TextView) findViewById(R.id.title);
-        bottom_navigation = (LinearLayout) findViewById(R.id.bottom_navigation);
-
 
         // initMenu();
-        if (getData(Constants.IS_LOGGED_PREF).equals("true")) {
-            // openNewFragment(new MainFragment());
-            openNewFragment(new TimerFragment(), "TimerFragment");
-        } else {
-            openNewFragment(new LogInFragment(), "LogInFragment");
-        }
-        Constants.initMenu(toggl, menuContent);
+        Constants.initMenu(binding.ivMenu, binding.lMenu.menuContent);
         profile_menu.setOnClickListener(v -> openNewFragment(new ProfileFragment(), "ProfileFragment"));
-
         logout_menu.setOnClickListener(view -> Constants.logOut(MainActivity.this));
-
         contact_menu.setOnClickListener(view -> openNewFragment(new ContactUsFragment(), "ContactUsFragment"));
-//        Fabric.with(this, new Crashlytics());
+
+        //        Fabric.with(this, new Crashlytics());
         // TODO: Move this to where you establish a user session
         //logUser();
 
@@ -67,26 +61,28 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void setupBottomNav() {
+        navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        NavGraph graph = navController.getGraph();
+
+        if (getBooleanData(Constants.IS_LOGGED_PREF)) graph.setStartDestination(R.id.timerFragment);
+        else graph.setStartDestination(R.id.loginFragment);
+
+        navController.setGraph(graph);
+
+        NavigationUI.setupWithNavController(binding.bottomNavView, navController);
+    }
+
+
     private void initBottomMenu() {
-
-        LinearLayout tab_timer = findViewById(R.id.tab_timer);
-        tab_timer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openNewFragment(new TimerFragment(), "TimerFragment");
-            }
-        });
-
-        LinearLayout tab_orders = findViewById(R.id.tab_orders);
-        tab_orders.setOnClickListener(view -> {
-            currentFragment = CurrentFragment.newInstance("active", "");
-            openNewFragment(currentFragment, "currentFragment");
-        });
-        LinearLayout tab_history = findViewById(R.id.tab_history);
-        tab_history.setOnClickListener(view -> {
-            currentFragment = CurrentFragment.newInstance("finished", "");
-            openNewFragment(currentFragment, "currentFragment");
-        });
+//        tab_orders.setOnClickListener(view -> {
+//            currentFragment = CurrentFragment.newInstance("active", "");
+//            openNewFragment(currentFragment, "currentFragment");
+//        });
+//        tab_history.setOnClickListener(view -> {
+//            currentFragment = CurrentFragment.newInstance("finished", "");
+//            openNewFragment(currentFragment, "currentFragment");
+//        });
     }
 
     public void openNewFragment(final Fragment fragment, final String tag) {
@@ -95,11 +91,11 @@ public class MainActivity extends AppCompatActivity {
 //            manager.popBackStack();
 //        }
         FragmentTransaction transaction = manager.beginTransaction();
-        transaction.replace(R.id.fragment_container, fragment, tag);
+//        transaction.replace(R.id.fragment_container, fragment, tag);
         // transaction.addToBackStack(null);
         transaction.commit();
 
-        Constants.closeMenu(menuContent);
+        Constants.closeMenu(binding.lMenu.menuContent);
     }
 
     public void forceCrash(View view) {
@@ -116,8 +112,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setBottomNavigationVisibility(int visibility) {
-        bottom_navigation.setVisibility(visibility);
-        toggl.setVisibility(visibility);
+        binding.bottomNavView.setVisibility(visibility);
+        binding.ivMenu.setVisibility(visibility);
     }
 
     private void logUser() {
@@ -179,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
 //    }
 
     public void setTitle(String titleTxt) {
-        title.setText(titleTxt);
+//        title.setText(titleTxt);
     }
 
 
@@ -191,4 +187,6 @@ public class MainActivity extends AppCompatActivity {
 //            //imageview.setImageBitmap(image);
 //        }
 //    }
+
+
 }

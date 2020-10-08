@@ -81,12 +81,12 @@ public class Constants {
         UserDetails.getInstance().setToken(token);
        saveData(Constants.TOKEN_PREF, token);
        saveData(Constants.ID_PREF, id);
-       saveData(Constants.IS_LOGGED_PREF, "true");
+       saveData(Constants.IS_LOGGED_PREF, true);
     }
 
     public static void logOut(Context context){
         saveData(Constants.TOKEN_PREF, "");
-        saveData(Constants.IS_LOGGED_PREF, "false");
+        saveData(Constants.IS_LOGGED_PREF, false);
         saveData(Constants.F_NAME_PREF, "");
         saveData(Constants.L_NAME_PREF,"");
         saveData(Constants.PHONE_PREF, "");

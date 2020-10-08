@@ -45,7 +45,7 @@ public class CurrentFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    private String pageType;
+    private String pageType = Constants.ACTIVE;
     private String mParam2;
 
     private View view;

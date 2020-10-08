@@ -35,6 +35,7 @@ import java.io.ByteArrayOutputStream;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import static com.bringit.orders.utils.SharedPrefs.getData;
 import static com.bringit.orders.utils.SharedPrefs.saveData;
@@ -134,7 +135,8 @@ public class RegisterFragment extends Fragment {
                 sendProfileToServer();
             }
         });
-        exist_user.setOnClickListener(view -> ((MainActivity) getActivity()).openNewFragment(new LogInFragment(), ""));
+        exist_user.setOnClickListener(view -> NavHostFragment.findNavController(this)
+                .navigate(RegisterFragmentDirections.actionRegisterFragmentToLoginFragment()));
         initDataFromPref();
 
     }

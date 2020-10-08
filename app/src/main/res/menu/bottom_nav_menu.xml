@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:icon="@drawable/ic_history"
+        android:id="@id/historyFragment"
+        android:title="הסטוריה" />
+    <item
+        android:icon="@drawable/ic_add_order"
+        android:id="@id/currentOrdersFragment"
+        android:title="הזמנות" />
+    <item
+        android:icon="@drawable/ic_timer"
+        android:id="@id/timerFragment"
+        android:title="פתיחת יום" />
+</menu>

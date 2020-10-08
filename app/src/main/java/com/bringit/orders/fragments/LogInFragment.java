@@ -9,12 +9,13 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.bringit.orders.activities.MainActivity;
 import com.bringit.orders.R;
+import com.bringit.orders.activities.MainActivity;
 import com.bringit.orders.network.Request;
 import com.google.firebase.FirebaseApp;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 public class LogInFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
@@ -101,7 +102,8 @@ public class LogInFragment extends Fragment {
         go.setOnClickListener(v -> Request.getInstance().logIn(mContext, phone.getText().toString(), password.getText().toString(),
                 isDataSuccess -> {
                     if (isDataSuccess) {
-                        ((MainActivity) getActivity()).openNewFragment(new TimerFragment(), "");
+                        NavHostFragment.findNavController(this)
+                                .navigate(LogInFragmentDirections.actionLoginFragmentToTimerFragment());
                     }
                 }));
         FirebaseApp.initializeApp(getActivity());
@@ -110,7 +112,8 @@ public class LogInFragment extends Fragment {
         user_details_layout.setOnClickListener(view -> {
         });
 
-        newUser.setOnClickListener(v -> ((MainActivity) getActivity()).openNewFragment(new RegisterFragment(), ""));
+        newUser.setOnClickListener(v -> NavHostFragment.findNavController(this)
+                .navigate(LogInFragmentDirections.actionLoginFragmentToRegisterFragment()));
         ((MainActivity) getActivity()).setTitle("כניסת משתמש");
         ((MainActivity) getActivity()).setBottomNavigationVisibility(8);
 
