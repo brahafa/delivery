@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="pizza_size">40dp</dimen>
+    <dimen name="pizza_rect_half_size">20dp</dimen>
+    <dimen name="pizza_rect_size_and_half">60dp</dimen>
+
+</resources>

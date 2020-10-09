@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    android:elevation="0dp"
+    android:id="@+id/parent"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    app:cardCornerRadius="6dp"
+    app:cardElevation="0dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:padding="4dp">
+
+        <LinearLayout
+            android:layout_height="40dp"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:gravity="center"
+                android:id="@+id/amount"
+                android:layout_gravity="center_vertical"
+                android:layout_height="25dp"
+                android:layout_marginLeft="8dp"
+                android:layout_width="wrap_content"
+                android:textColor="@color/blue_2060e5"
+                android:textSize="15sp"
+                android:textStyle="bold|italic"
+                android:visibility="invisible" />
+
+            <TextView
+                android:gravity="right"
+                android:id="@+id/name"
+                android:layout_gravity="center_vertical"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:textColor="@color/text_color"
+                android:textSize="13sp" />
+
+            <ImageView
+                android:id="@+id/iv_topping_location"
+                android:layout_height="40dp"
+                android:visibility="gone"
+                android:layout_width="40dp" />
+
+            <ImageView
+                android:id="@+id/iv_topping_location_rect"
+                android:layout_height="40dp"
+                android:visibility="gone"
+                android:layout_width="80dp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:background="@color/white_blur"
+            android:gravity="center"
+            android:id="@+id/tv_cancel"
+            android:layout_height="0dp"
+            android:layout_width="0dp"
+            android:text="CANCEL"
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

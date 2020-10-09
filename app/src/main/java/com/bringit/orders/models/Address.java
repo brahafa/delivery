@@ -1,127 +1,143 @@
 package com.bringit.orders.models;
 
-import java.io.Serializable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-/**
- * Created by User on 08/04/2018.
- */
+import com.google.gson.annotations.SerializedName;
 
-public class Address implements Serializable {
-    private String order_id;
-    private String city;
-    private String city_name;
-    private String street;
-    private String house_num;
-    private String floor;
-    private String apt_num;
-    private String day;
-    private String entrance;
-    private String phone;
+public class Address implements Parcelable {
 
-    public Address(){
+    @SerializedName("order_id")
+    private String mOrderId;
+    @SerializedName("status")
+    private String mStatus;
+    @SerializedName("time")
+    private String mTime;
+    @SerializedName("day")
+    private String mDay;
+    @SerializedName("city_name")
+    private String mCityName;
+    @SerializedName("street")
+    private String mStreet;
+    @SerializedName("house_num")
+    private String mHouseNum;
+    @SerializedName("phone")
+    private String mPhone;
+    @SerializedName("status_text")
+    private String mStatusText;
 
-    }
 
-    public Address(String phone, String day, String order_id, String city,String city_name, String street, String house_num, String floor, String apt_num, String entrance) {
-        this.order_id = order_id;
-        this.city = city;
-        this.city_name = city_name;
-        this.street = street;
-        this.house_num = house_num;
-        this.floor = floor;
-        this.apt_num = apt_num;
-        this.entrance = entrance;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getDay() {
-        return day;
-    }
-
-    public void setDay(String day) {
-        this.day = day;
-    }
-
-    public String getCity_name() {
-        return city_name;
-    }
-
-    public void setCity_name(String city_name) {
-        this.city_name = city_name;
-    }
-
-    public String getOrder_id() {
-        return order_id;
-    }
-
-    public void setOrder_id(String order_id) {
-        this.order_id = order_id;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getStreet() {
-        return street;
-    }
-
-    public void setStreet(String street) {
-        this.street = street;
-    }
-
-    public String getHouse_num() {
-        return house_num;
-    }
-
-    public void setHouse_num(String house_num) {
-        this.house_num = house_num;
-    }
-
-    public String getFloor() {
-        return floor;
-    }
-
-    public void setFloor(String floor) {
-        this.floor = floor;
-    }
-
-    public String getApt_num() {
-        return apt_num;
-    }
-
-    public void setApt_num(String apt_num) {
-        this.apt_num = apt_num;
-    }
-
-    public String getEntrance() {
-        return entrance;
-    }
-
-    public void setEntrance(String entrance) {
-        this.entrance = entrance;
+    protected Address(Parcel in) {
+        mOrderId = in.readString();
+        mStatus = in.readString();
+        mTime = in.readString();
+        mDay = in.readString();
+        mCityName = in.readString();
+        mStreet = in.readString();
+        mHouseNum = in.readString();
+        mPhone = in.readString();
+        mStatusText = in.readString();
     }
 
     @Override
-    public String toString() {
-        return "Address{" +
-                "city='" + city + '\'' +
-                ", street='" + street + '\'' +
-                ", house_num='" + house_num + '\'' +
-                ", floor='" + floor + '\'' +
-                ", apt_num='" + apt_num + '\'' +
-                ", entrance='" + entrance + '\'' +
-                '}';
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(mOrderId);
+        dest.writeString(mStatus);
+        dest.writeString(mTime);
+        dest.writeString(mDay);
+        dest.writeString(mCityName);
+        dest.writeString(mStreet);
+        dest.writeString(mHouseNum);
+        dest.writeString(mPhone);
+        dest.writeString(mStatusText);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<Address> CREATOR = new Creator<Address>() {
+        @Override
+        public Address createFromParcel(Parcel in) {
+            return new Address(in);
+        }
+
+        @Override
+        public Address[] newArray(int size) {
+            return new Address[size];
+        }
+    };
+
+    public String getOrderId() {
+        return mOrderId;
+    }
+
+    public void setOrderId(String orderId) {
+        mOrderId = orderId;
+    }
+
+    public String getStatus() {
+        return mStatus;
+    }
+
+    public void setStatus(String status) {
+        mStatus = status;
+    }
+
+    public String getTime() {
+        return mTime;
+    }
+
+    public void setTime(String time) {
+        mTime = time;
+    }
+
+    public String getDay() {
+        return mDay;
+    }
+
+    public void setDay(String day) {
+        mDay = day;
+    }
+
+    public String getCityName() {
+        return mCityName;
+    }
+
+    public void setCityName(String cityName) {
+        mCityName = cityName;
+    }
+
+    public String getStreet() {
+        return mStreet;
+    }
+
+    public void setStreet(String street) {
+        mStreet = street;
+    }
+
+    public String getHouseNum() {
+        return mHouseNum;
+    }
+
+    public void setHouseNum(String houseNum) {
+        mHouseNum = houseNum;
+    }
+
+    public String getPhone() {
+        return mPhone;
+    }
+
+    public void setPhone(String phone) {
+        mPhone = phone;
+    }
+
+    public String getStatusText() {
+        return mStatusText;
+    }
+
+    public void setStatusText(String statusText) {
+        mStatusText = statusText;
     }
 }

@@ -36,6 +36,7 @@ public class Network {
 
     private NetworkCallBack listener;
     public static String BASE_URL = "https://api.bringit.co.il/?apiCtrl=deliver&do=";
+    private final String BASE_URL_2 = "https://api2.bringit.co.il/";
 
     public enum RequestName {
         LOG_IN, SIGN_UP, CONFIRM_USER,
@@ -48,16 +49,22 @@ public class Network {
     }
 
     public void sendRequest(final Context context, final RequestName requestName, String param1) {
-        String url = BASE_URL;
+        sendRequest(context, requestName, param1, false);
+    }
+
+    public void sendRequest(final Context context, final RequestName requestName, String param1, boolean isApi2) {
+        String url = isApi2 ? BASE_URL_2 : BASE_URL;
+
         switch (requestName) {
 //            case SIGN_UP:
 //                url += "searchCities&q=" + param1;
 //                break;
-            case GET_DELIVERS_ORDERS:
-                url += "getDeliversOrders&type=" + param1;
+            case GET_DELIVERS_ORDERS: //api 2
+                url += "delivering/orders/" + param1;
+//                url += "getDeliversOrders&type=" + param1;
                 break;
-            case GET_ORDER_DETAILS_BY_ID:
-                url += "getOrderDetailsById&order_id=" + param1;
+            case GET_ORDER_DETAILS_BY_ID: //api 2
+                url += "delivering/order/" + param1;
                 break;
         }
         sendRequestObject(requestName, url, context, listener);

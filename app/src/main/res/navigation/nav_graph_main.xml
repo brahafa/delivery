@@ -6,22 +6,87 @@
     android:id="@+id/nav_graph_main"
     app:startDestination="@id/timerFragment">
 
+    <!--    history     -->
     <fragment
         android:id="@+id/historyFragment"
         android:label="הסטוריה"
         android:name="com.bringit.orders.fragments.CurrentFragment"
-        tools:layout="@layout/fragment_current" />
+        tools:layout="@layout/fragment_current">
+        <argument
+            android:defaultValue="finished"
+            android:name="page_type"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_currentOrdersFragment_to_orderDetailsFragment"
+            app:destination="@id/orderDetailsFinishedFragment">
+            <argument
+                android:name="order_item"
+                app:argType="com.bringit.orders.models.Address" />
+            <argument
+                android:name="page_type"
+                app:argType="string" />
+        </action>
+    </fragment>
+
+    <!--    current     -->
     <fragment
         android:id="@+id/currentOrdersFragment"
         android:label="הזמנות"
         android:name="com.bringit.orders.fragments.CurrentFragment"
-        tools:layout="@layout/fragment_current" />
+        tools:layout="@layout/fragment_current">
+        <argument
+            android:defaultValue="active"
+            android:name="page_type"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_currentOrdersFragment_to_orderDetailsFragment"
+            app:destination="@id/orderDetailsFragment">
+            <argument
+                android:name="order_item"
+                app:argType="com.bringit.orders.models.Address" />
+            <argument
+                android:name="page_type"
+                app:argType="string" />
+        </action>
+    </fragment>
+
+
+    <!--    timer     -->
     <fragment
         android:id="@+id/timerFragment"
         android:label="פתיחת יום"
         android:name="com.bringit.orders.fragments.TimerFragment"
         tools:layout="@layout/fragment_timer" />
 
+    <!--    details     -->
+    <fragment
+        android:id="@+id/orderDetailsFragment"
+        android:label="הזמנות"
+        android:name="com.bringit.orders.fragments.OrderDetailsFragment"
+        tools:layout="@layout/fragment_order_details">
+        <argument
+            android:name="order_item"
+            app:argType="com.bringit.orders.models.Address" />
+        <argument
+            android:name="page_type"
+            app:argType="string" />
+    </fragment>
+
+    <!--    details finished     -->
+    <fragment
+        android:id="@+id/orderDetailsFinishedFragment"
+        android:label="הסטוריה"
+        android:name="com.bringit.orders.fragments.OrderDetailsFragment"
+        tools:layout="@layout/fragment_order_details">
+        <argument
+            android:name="order_item"
+            app:argType="com.bringit.orders.models.Address" />
+        <argument
+            android:name="page_type"
+            app:argType="string" />
+    </fragment>
+
+    <!--    login     -->
     <fragment
         android:id="@+id/loginFragment"
         android:label="כניסת משתמש"
@@ -38,6 +103,7 @@
             app:destination="@id/registerFragment" />
     </fragment>
 
+    <!--    register     -->
     <fragment
         android:id="@+id/registerFragment"
         android:label="הרשמה"

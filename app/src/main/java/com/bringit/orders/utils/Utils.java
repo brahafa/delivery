@@ -4,9 +4,18 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Build;
 
+import com.bringit.orders.R;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import static com.bringit.orders.utils.Constants.PIZZA_TYPE_BL;
+import static com.bringit.orders.utils.Constants.PIZZA_TYPE_BR;
+import static com.bringit.orders.utils.Constants.PIZZA_TYPE_FULL;
+import static com.bringit.orders.utils.Constants.PIZZA_TYPE_LH;
+import static com.bringit.orders.utils.Constants.PIZZA_TYPE_RH;
+import static com.bringit.orders.utils.Constants.PIZZA_TYPE_TL;
+import static com.bringit.orders.utils.Constants.PIZZA_TYPE_TR;
 import static com.bringit.orders.utils.SharedPrefs.saveData;
 
 public class Utils {
@@ -42,5 +51,60 @@ public class Utils {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+    public static int getImageRes(String viewType) {
+        int imageRes = R.drawable.ic_pizza_full_active;
+        switch (viewType) {
+            case PIZZA_TYPE_FULL:
+                imageRes = R.drawable.ic_pizza_full_active;
+                break;
+            case PIZZA_TYPE_RH:
+                imageRes = R.drawable.ic_pizza_rh_active;
+                break;
+            case PIZZA_TYPE_LH:
+                imageRes = R.drawable.ic_pizza_lh_active;
+                break;
+            case PIZZA_TYPE_TR:
+                imageRes = R.drawable.ic_pizza_tr_cart;
+                break;
+            case PIZZA_TYPE_TL:
+                imageRes = R.drawable.ic_pizza_tl_cart;
+                break;
+            case PIZZA_TYPE_BR:
+                imageRes = R.drawable.ic_pizza_br_cart;
+                break;
+            case PIZZA_TYPE_BL:
+                imageRes = R.drawable.ic_pizza_bl_cart;
+                break;
+        }
+        return imageRes;
+    }
+
+    public static int getImageResRect(String viewType) {
+        int imageRes = R.drawable.ic_pizza_full_rect_active;
+        switch (viewType) {
+            case PIZZA_TYPE_FULL:
+                imageRes = R.drawable.ic_pizza_full_rect_active;
+                break;
+            case PIZZA_TYPE_RH:
+                imageRes = R.drawable.ic_pizza_rh_rect_cart;
+                break;
+            case PIZZA_TYPE_LH:
+                imageRes = R.drawable.ic_pizza_lh_rect_cart;
+                break;
+            case PIZZA_TYPE_TR:
+                imageRes = R.drawable.ic_pizza_tr_rect_cart;
+                break;
+            case PIZZA_TYPE_TL:
+                imageRes = R.drawable.ic_pizza_tl_rect_cart;
+                break;
+            case PIZZA_TYPE_BR:
+                imageRes = R.drawable.ic_pizza_br_rect_cart;
+                break;
+            case PIZZA_TYPE_BL:
+                imageRes = R.drawable.ic_pizza_bl_rect_cart;
+                break;
+        }
+        return imageRes;
     }
 }

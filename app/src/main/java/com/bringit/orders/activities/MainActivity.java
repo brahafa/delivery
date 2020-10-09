@@ -1,14 +1,11 @@
 package com.bringit.orders.activities;
 
-import android.app.FragmentManager;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.RelativeLayout;
 
 import com.bringit.orders.R;
 import com.bringit.orders.databinding.ActivityMainBinding;
 import com.bringit.orders.fragments.ContactUsFragment;
-import com.bringit.orders.fragments.CurrentFragment;
 import com.bringit.orders.fragments.ProfileFragment;
 import com.bringit.orders.utils.Constants;
 
@@ -28,9 +25,6 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private NavController navController;
 
-    private RelativeLayout profile_menu, logout_menu, contact_menu;
-    CurrentFragment currentFragment;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,25 +33,18 @@ public class MainActivity extends AppCompatActivity {
 
         setupBottomNav();
 
-        navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
-            binding.tvTitle.setText(destination.getLabel());
-        });
-
-        profile_menu = (RelativeLayout) findViewById(R.id.profile_menu);
-        logout_menu = (RelativeLayout) findViewById(R.id.logout_menu);
-        contact_menu = (RelativeLayout) findViewById(R.id.contact_menu);
+        navController.addOnDestinationChangedListener((controller, destination, arguments) ->
+                binding.tvTitle.setText(destination.getLabel()));
 
         // initMenu();
         Constants.initMenu(binding.ivMenu, binding.lMenu.menuContent);
-        profile_menu.setOnClickListener(v -> openNewFragment(new ProfileFragment(), "ProfileFragment"));
-        logout_menu.setOnClickListener(view -> Constants.logOut(MainActivity.this));
-        contact_menu.setOnClickListener(view -> openNewFragment(new ContactUsFragment(), "ContactUsFragment"));
+        binding.lMenu.profileMenu.setOnClickListener(v -> openNewFragment(new ProfileFragment(), "ProfileFragment"));
+        binding.lMenu.logoutMenu.setOnClickListener(view -> Constants.logOut(MainActivity.this));
+        binding.lMenu.contactMenu.setOnClickListener(view -> openNewFragment(new ContactUsFragment(), "ContactUsFragment"));
 
         //        Fabric.with(this, new Crashlytics());
         // TODO: Move this to where you establish a user session
         //logUser();
-
-        initBottomMenu();
 
     }
 
@@ -71,18 +58,6 @@ public class MainActivity extends AppCompatActivity {
         navController.setGraph(graph);
 
         NavigationUI.setupWithNavController(binding.bottomNavView, navController);
-    }
-
-
-    private void initBottomMenu() {
-//        tab_orders.setOnClickListener(view -> {
-//            currentFragment = CurrentFragment.newInstance("active", "");
-//            openNewFragment(currentFragment, "currentFragment");
-//        });
-//        tab_history.setOnClickListener(view -> {
-//            currentFragment = CurrentFragment.newInstance("finished", "");
-//            openNewFragment(currentFragment, "currentFragment");
-//        });
     }
 
     public void openNewFragment(final Fragment fragment, final String tag) {
@@ -100,15 +75,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void forceCrash(View view) {
         throw new RuntimeException("This is a crash");
-    }
-
-    public void popFragment(String pageType) {
-        FragmentManager manager = getFragmentManager();
-//        for(int i = 0; i < manager.getBackStackEntryCount(); ++i) {
-        manager.popBackStack();
-        CurrentFragment currentFragment = CurrentFragment.newInstance(pageType, "");
-        openNewFragment(currentFragment, "currentFragment");
-//        }
     }
 
     public void setBottomNavigationVisibility(int visibility) {

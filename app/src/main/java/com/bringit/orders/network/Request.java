@@ -3,7 +3,7 @@ package com.bringit.orders.network;
 import android.content.Context;
 import android.util.Log;
 
-import com.bringit.orders.models.Order;
+import com.bringit.orders.models.OrderDetailsModel;
 import com.bringit.orders.models.RegistrationModel;
 import com.bringit.orders.utils.Constants;
 import com.google.gson.Gson;
@@ -25,11 +25,11 @@ public class Request {
         return sRequest;
     }
 
-    public void logIn(final Context context, String password, String email, final RequestCallBackSuccess listener) {
+    public void logIn(final Context context, String password, String phone, final RequestCallBackSuccess listener) {
         JSONObject jsonObject = new JSONObject();
         try {
+            jsonObject.put("phone", phone);
             jsonObject.put("password", password);
-            jsonObject.put("email", email);
 
             Log.d("send data: ", jsonObject.toString());
 
@@ -234,7 +234,7 @@ public class Request {
                 listener.onDataDone(json);
             }
         });
-        network.sendRequest(context, Network.RequestName.GET_DELIVERS_ORDERS, pageType);
+        network.sendRequest(context, Network.RequestName.GET_DELIVERS_ORDERS, pageType, true);
     }
 
     public void getOrderDetailsByID(Context context, String orderId, RequestOrderDetailsCallBack listener) {
@@ -244,8 +244,9 @@ public class Request {
                 try {
                     Log.d("getOrderDetailsByID", json.toString());
                     Gson gson = new Gson();
-                    Order response = gson.fromJson(json.getString("order"), Order.class);
-                    listener.onDataDone(response);
+                    OrderDetailsModel orderDetailsModel = gson.fromJson(json.getString("order"), OrderDetailsModel.class);
+
+                    listener.onDataDone(orderDetailsModel);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -258,7 +259,7 @@ public class Request {
 
             }
         });
-        network.sendRequest(context, Network.RequestName.GET_ORDER_DETAILS_BY_ID, orderId);
+        network.sendRequest(context, Network.RequestName.GET_ORDER_DETAILS_BY_ID, orderId, true);
     }
 
 
@@ -304,7 +305,7 @@ public class Request {
     }
 
     public interface RequestOrderDetailsCallBack {
-        void onDataDone(Order response);
+        void onDataDone(OrderDetailsModel response);
     }
 
     public interface RequestJsonCallBack {

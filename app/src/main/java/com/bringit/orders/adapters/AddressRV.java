@@ -36,12 +36,12 @@ public class AddressRV extends RecyclerView.Adapter<AddressRV.CartHolder> {
     private String pageType;
     private AdapterCallback adapterCallback;
 
-     class CartHolder extends RecyclerView.ViewHolder {
-         TextView address;
-         View view;
+    class CartHolder extends RecyclerView.ViewHolder {
+        TextView address;
+        View view;
         TextView color, global_date;
         LinearLayout openLayout;
-        ImageView  call, waze;
+        ImageView call, waze;
 
         CartHolder(View view) {
             super(view);
@@ -58,7 +58,7 @@ public class AddressRV extends RecyclerView.Adapter<AddressRV.CartHolder> {
         this.addresses = addresses;
         this.context = context;
         this.pageType = pageType;
-        this.adapterCallback=adapterCallback;
+        this.adapterCallback = adapterCallback;
     }
 
     @NonNull
@@ -69,24 +69,24 @@ public class AddressRV extends RecyclerView.Adapter<AddressRV.CartHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final CartHolder holder,  int position) {
-       // final Order product = addresses.get(position);
-        final int position1= position;
-        holder.address.setText(format("%s  %s  %s  ", addresses.get(position).getCity_name(),  addresses.get(position).getStreet(),  addresses.get(position).getHouse_num()));
+    public void onBindViewHolder(@NonNull final CartHolder holder, int position) {
+        // final Order product = addresses.get(position);
+        final int position1 = position;
+        holder.address.setText(format("%s  %s  %s  ", addresses.get(position).getCityName(), addresses.get(position).getStreet(), addresses.get(position).getHouseNum()));
         holder.waze.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                initWaze( addresses.get(holder.getAdapterPosition()));
+                initWaze(addresses.get(holder.getAdapterPosition()));
             }
         });
         holder.call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                initCall( addresses.get(holder.getAdapterPosition()));
+                initCall(addresses.get(holder.getAdapterPosition()));
             }
         });
 
-        if (pageType.equals(Constants.FINISH)) {
+        if (pageType.equals(Constants.FINISHED)) {
             holder.waze.setVisibility(View.GONE);
             holder.call.setVisibility(View.GONE);
         } else {
@@ -94,22 +94,22 @@ public class AddressRV extends RecyclerView.Adapter<AddressRV.CartHolder> {
             holder.call.setVisibility(View.VISIBLE);
         }
 
-        holder.global_date.setText(Constants.dateFormatToDisplay( addresses.get(position).getDay()));
+        holder.global_date.setText(Constants.dateFormatToDisplay(addresses.get(position).getDay()));
 
-            if(position1==0){
-                Log.d("position 0", String.valueOf(position1));
-                holder.global_date.setVisibility(View.VISIBLE);
-            }else if((Constants.stringToDate(addresses.get(position).getDay()).compareTo(Constants.stringToDate(addresses.get(position-1).getDay())))!=0){
-                Log.d("position 1", String.valueOf(position1));
-                holder.global_date.setVisibility(View.VISIBLE);
-            }else{
-                Log.d("position else", String.valueOf(position1));
-                holder.global_date.setVisibility(View.GONE);
-            }
+        if (position1 == 0) {
+            Log.d("position 0", String.valueOf(position1));
+            holder.global_date.setVisibility(View.VISIBLE);
+        } else if ((Constants.stringToDate(addresses.get(position).getDay()).compareTo(Constants.stringToDate(addresses.get(position - 1).getDay()))) != 0) {
+            Log.d("position 1", String.valueOf(position1));
+            holder.global_date.setVisibility(View.VISIBLE);
+        } else {
+            Log.d("position else", String.valueOf(position1));
+            holder.global_date.setVisibility(View.GONE);
+        }
         holder.address.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                adapterCallback.onItemChoose( addresses.get(holder.getAdapterPosition()));
+                adapterCallback.onItemChoose(addresses.get(holder.getAdapterPosition()));
             }
         });
     }
@@ -122,25 +122,20 @@ public class AddressRV extends RecyclerView.Adapter<AddressRV.CartHolder> {
     private void initCall(Address product) {
         Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + product.getPhone()));
         if (ContextCompat.checkSelfPermission(context, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(((MainActivity)context) , new String[]{Manifest.permission.CALL_PHONE},15);
-        }
-        else
-        {
+            ActivityCompat.requestPermissions(((MainActivity) context), new String[]{Manifest.permission.CALL_PHONE}, 15);
+        } else {
             context.startActivity(intent);
         }
     }
 
     private void initWaze(Address product) {
-        try
-        {
-            String url =  "https://waze.com/ul?q="+product.getCity_name()+"%20"+product.getHouse_num()+"%20"+product.getStreet();
-            Intent intent = new Intent( Intent.ACTION_VIEW, Uri.parse( url ) );
-            context.startActivity( intent );
-        }
-        catch (ActivityNotFoundException ex  )
-        {
+        try {
+            String url = "https://waze.com/ul?q=" + product.getCityName() + "%20" + product.getHouseNum() + "%20" + product.getStreet();
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+            context.startActivity(intent);
+        } catch (ActivityNotFoundException ex) {
             // If Waze is not installed, open it in Google Play:
-            Intent intent = new Intent( Intent.ACTION_VIEW, Uri.parse( "market://details?id=com.waze" ) );
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.waze"));
             context.startActivity(intent);
         }
     }

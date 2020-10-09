@@ -99,7 +99,7 @@ public class LogInFragment extends Fragment {
 //            }
 //        });
 
-        go.setOnClickListener(v -> Request.getInstance().logIn(mContext, phone.getText().toString(), password.getText().toString(),
+        go.setOnClickListener(v -> Request.getInstance().logIn(mContext, password.getText().toString(), phone.getText().toString(),
                 isDataSuccess -> {
                     if (isDataSuccess) {
                         NavHostFragment.findNavController(this)
