@@ -60,6 +60,10 @@ public class OrderDetailsFragment extends Fragment {
     private void initUI() {
         binding.confirmOrderDelivering.setVisibility(pageType.equals(Constants.FINISHED) ? View.GONE : View.VISIBLE);
 
+        binding.ivOpenProducts.setOnClickListener(view -> {
+            binding.ivOpenProducts.setRotation(binding.ivOpenProducts.getRotation() + 180);
+            binding.orderCartRv.setVisibility(binding.orderCartRv.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
+        });
         binding.x.setOnClickListener(view -> getActivity().onBackPressed());
 
         binding.confirmOrderDelivering.setOnClickListener(v ->

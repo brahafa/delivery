@@ -114,4 +114,13 @@
             app:destination="@id/loginFragment" />
     </fragment>
 
+    <fragment
+        android:id="@+id/profileFragment"
+        android:label="פרטים אישיים"
+        android:name="com.bringit.orders.fragments.ProfileFragment" />
+    <fragment
+        android:id="@+id/contactUsFragment"
+        android:label="ContactUsFragment"
+        android:name="com.bringit.orders.fragments.ContactUsFragment" />
+
 </navigation>

@@ -5,8 +5,6 @@ import android.view.View;
 
 import com.bringit.orders.R;
 import com.bringit.orders.databinding.ActivityMainBinding;
-import com.bringit.orders.fragments.ContactUsFragment;
-import com.bringit.orders.fragments.ProfileFragment;
 import com.bringit.orders.utils.Constants;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.NavGraph;
+import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
@@ -38,9 +37,23 @@ public class MainActivity extends AppCompatActivity {
 
         // initMenu();
         Constants.initMenu(binding.ivMenu, binding.lMenu.menuContent);
-        binding.lMenu.profileMenu.setOnClickListener(v -> openNewFragment(new ProfileFragment(), "ProfileFragment"));
-        binding.lMenu.logoutMenu.setOnClickListener(view -> Constants.logOut(MainActivity.this));
-        binding.lMenu.contactMenu.setOnClickListener(view -> openNewFragment(new ContactUsFragment(), "ContactUsFragment"));
+        binding.lMenu.profileMenu.setOnClickListener(v -> {
+            navController.navigate(R.id.profileFragment);
+            Constants.closeMenu(binding.lMenu.menuContent);
+        });
+        binding.lMenu.logoutMenu.setOnClickListener(view -> {
+            navController.navigate(R.id.loginFragment, null,
+                    new NavOptions.Builder()
+                            .setLaunchSingleTop(true)
+                            .setPopUpTo(R.id.nav_graph_main, true)
+                            .build());
+            Constants.logOut(MainActivity.this);
+            Constants.closeMenu(binding.lMenu.menuContent);
+        });
+        binding.lMenu.contactMenu.setOnClickListener(view -> {
+            navController.navigate(R.id.contactUsFragment);
+            Constants.closeMenu(binding.lMenu.menuContent);
+        });
 
         //        Fabric.with(this, new Crashlytics());
         // TODO: Move this to where you establish a user session

@@ -18,7 +18,6 @@ import android.widget.DatePicker;
 import android.widget.ImageView;
 
 import com.bringit.orders.activities.MainActivity;
-import com.bringit.orders.fragments.LogInFragment;
 import com.bringit.orders.models.UserDetails;
 
 import java.text.DateFormat;
@@ -120,7 +119,6 @@ public class Constants {
         saveData(Constants.HOME, "");
         saveData(Constants.ENTER, "");
         saveData(Constants.T_Z, "");
-        ((MainActivity) context).openNewFragment(new LogInFragment(), "");
     }
 
     public static void openOrder(View orderContent) {
@@ -215,21 +213,13 @@ public class Constants {
 
     public static void initMenu(ImageView toggle, final View menuContent) {
 
-        menuContent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                closeMenu(menuContent);
-            }
-        });
+        menuContent.setOnClickListener(v -> closeMenu(menuContent));
 
-        toggle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (isMenuOpen(menuContent)) {
-                    closeMenu(menuContent);
-                } else {
-                    openMenu(menuContent);
-                }
+        toggle.setOnClickListener(v -> {
+            if (isMenuOpen(menuContent)) {
+                closeMenu(menuContent);
+            } else {
+                openMenu(menuContent);
             }
         });
     }
