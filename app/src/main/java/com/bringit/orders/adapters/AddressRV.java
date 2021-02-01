@@ -14,17 +14,17 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.bringit.orders.R;
 import com.bringit.orders.activities.MainActivity;
 import com.bringit.orders.models.Address;
 import com.bringit.orders.utils.Constants;
 
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.RecyclerView;
 
 import static java.lang.String.format;
 
@@ -72,7 +72,10 @@ public class AddressRV extends RecyclerView.Adapter<AddressRV.CartHolder> {
     public void onBindViewHolder(@NonNull final CartHolder holder, int position) {
         // final Order product = addresses.get(position);
         final int position1 = position;
-        holder.address.setText(format("%s  %s  %s  ", addresses.get(position).getCityName(), addresses.get(position).getStreet(), addresses.get(position).getHouseNum()));
+        holder.address.setText(format("%s  %s  %s  ",
+                "אשדוד",//addresses.get(position).getCityName(), //fixme get City name when works on server
+                addresses.get(position).getStreet(),
+                addresses.get(position).getHouseNum()));
         holder.waze.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -130,7 +133,9 @@ public class AddressRV extends RecyclerView.Adapter<AddressRV.CartHolder> {
 
     private void initWaze(Address product) {
         try {
-            String url = "https://waze.com/ul?q=" + product.getCityName() + "%20" + product.getHouseNum() + "%20" + product.getStreet();
+            String url = "https://waze.com/ul?q="
+                    + "אשדוד"//product.getCityName() //fixme get City name when works on server
+                    + "%20" + product.getHouseNum() + "%20" + product.getStreet();
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
             context.startActivity(intent);
         } catch (ActivityNotFoundException ex) {
