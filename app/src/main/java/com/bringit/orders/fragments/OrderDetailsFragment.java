@@ -22,6 +22,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
+import java.util.Locale;
 
 import static java.lang.String.format;
 
@@ -97,8 +98,8 @@ public class OrderDetailsFragment extends Fragment {
         binding.time.setText(order.getOrderTime());
         binding.comments.setText(order.getNotes());
         binding.payType.setText(order.getPaymentDisplay());
-        binding.deliveryPrice.setText(order.getDeliveryPrice());
-        binding.payment.setText(String.format("%s", order.getTotalWithDelivery()));
+        binding.deliveryPrice.setText(String.format(Locale.US, "%.2f", Double.parseDouble(order.getDeliveryPrice())));
+        binding.payment.setText(String.format(Locale.US, "%.2f", Double.parseDouble(order.getTotalWithDelivery())));
 
     }
 

@@ -7,16 +7,17 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.bringit.orders.R;
 import com.bringit.orders.models.ItemModel;
 import com.bringit.orders.models.OrderCategoryModel;
 import com.bringit.orders.utils.Constants;
 
 import java.util.List;
-
-import androidx.cardview.widget.CardView;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import java.util.Locale;
 
 import static com.bringit.orders.utils.Constants.ITEM_TYPE_ADDITIONAL_OFFER;
 import static com.bringit.orders.utils.Constants.ITEM_TYPE_DEAL;
@@ -186,7 +187,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             amount.setText("במבצע");
             amount.setTextColor(context.getResources().getColor(R.color.red_F52E2E));
         } else {
-            amount.setText(String.format("%s %s", item.getPrice(), "₪"));
+            amount.setText(String.format(Locale.US, "₪ %.2f", Double.parseDouble(item.getPrice())));
             amount.setTextColor(context.getResources().getColor(R.color.blue_2060e5));
         }
 

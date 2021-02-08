@@ -35,8 +35,8 @@ public class Network {
     private final String SESSION_COOKIE = "Apikey";
 
     private NetworkCallBack listener;
-    public static String BASE_URL = "https://api.bringit.org.il/?apiCtrl=deliver&do=";
-    private final String BASE_URL_2 = "https://api2.bringit.org.il/";
+    public static String BASE_URL = "https://api.bringit.org.il/?apiCtrl=deliver&do="; //dev
+    private final String BASE_URL_2 = "https://api2.bringit.org.il/"; //dev
 
     public enum RequestName {
         LOG_IN, SIGN_UP, CONFIRM_USER,

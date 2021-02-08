@@ -378,7 +378,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:paddingRight="5dp"
-                    tools:itemCount="0"
+                    tools:itemCount="1"
                     tools:listitem="@layout/rv_item_order_details" />
 
 
