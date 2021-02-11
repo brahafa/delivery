@@ -18,12 +18,12 @@ import android.os.IBinder;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.core.app.NotificationCompat;
+
 import com.bringit.orders.R;
 import com.bringit.orders.utils.Constants;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import androidx.core.app.NotificationCompat;
 
 import static android.content.ContentValues.TAG;
 import static com.bringit.orders.utils.SharedPrefs.getData;
@@ -64,6 +64,12 @@ public class MyForeGroundService extends Service {
     public void onCreate() {
         super.onCreate();
         Log.d(TAG_FOREGROUND_SERVICE, "My foreground service onCreate().");
+    }
+
+    @Override
+    public void onDestroy() {
+        stopForegroundService();
+        super.onDestroy();
     }
 
     @Override
@@ -137,12 +143,19 @@ public class MyForeGroundService extends Service {
             assert manager != null;
             manager.createNotificationChannel(chan);
 
+            Intent intent = new Intent(this, MyForeGroundService.class);
+            PendingIntent servicePendingIntent = PendingIntent.getService(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
             NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID);
-            Notification notification = notificationBuilder.setOngoing(true)
+            Notification notification = notificationBuilder
                     .setSmallIcon(R.drawable.common_google_signin_btn_icon_light)
                     .setContentTitle("App is running in background")
                     .setPriority(NotificationManager.IMPORTANCE_HIGH)
                     .setCategory(Notification.CATEGORY_SERVICE)
+                    .setOngoing(true)
+                    .setAutoCancel(true)
+                    .addAction(R.drawable.ic_timer, "Stop", servicePendingIntent)
+
                     .build();
             startForeground(1, notification);
         } else {
