@@ -1,11 +1,10 @@
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_margin="3dp"
-    android:gravity="center"
-    >
+    android:gravity="center">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -415,7 +414,7 @@
         android:padding="25dp"
         android:layout_marginTop="38dp"
         android:orientation="vertical"
-        >
+        tools:visibility="gone">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

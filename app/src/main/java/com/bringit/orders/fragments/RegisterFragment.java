@@ -22,8 +22,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bringit.orders.activities.MainActivity;
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
+
 import com.bringit.orders.R;
+import com.bringit.orders.activities.MainActivity;
 import com.bringit.orders.models.RegistrationModel;
 import com.bringit.orders.network.Request;
 import com.bringit.orders.utils.Constants;
@@ -31,11 +36,6 @@ import com.bringit.orders.utils.Constants;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
 
 import static com.bringit.orders.utils.SharedPrefs.getData;
 import static com.bringit.orders.utils.SharedPrefs.saveData;
@@ -64,34 +64,30 @@ public class RegisterFragment extends Fragment {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_register, container, false);
         initUI();
-        ImageView camera1 = (ImageView) view.findViewById(R.id.take_pic_tz);
-        ImageView camera2 = (ImageView) view.findViewById(R.id.take_pic_self);
+        ImageView camera1 = view.findViewById(R.id.take_pic_tz);
+        ImageView camera2 = view.findViewById(R.id.take_pic_self);
 
-        camera1.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                Log.d(",,,", "  camera1  ");
-                //cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && getActivity().checkSelfPermission(Manifest.permission.CAMERA)
-                        != PackageManager.PERMISSION_GRANTED) {
-                    checkPermission(1);
-                } else {
-                    startActivityForResult(cameraIntent, 1);
-                }
+        camera1.setOnClickListener(v -> {
+            Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            Log.d(",,,", "  camera1  ");
+            //cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && getActivity().checkSelfPermission(Manifest.permission.CAMERA)
+                    != PackageManager.PERMISSION_GRANTED) {
+                checkPermission(1);
+            } else {
+                startActivityForResult(cameraIntent, 1);
             }
         });
 
-        camera2.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                Log.d(",,,", "  camera2  ");
-                //cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && getActivity().checkSelfPermission(Manifest.permission.CAMERA)
-                        != PackageManager.PERMISSION_GRANTED) {
-                    checkPermission(2);
-                } else {
-                    startActivityForResult(cameraIntent, 2);
-                }
+        camera2.setOnClickListener(v -> {
+            Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            Log.d(",,,", "  camera2  ");
+            //cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && getActivity().checkSelfPermission(Manifest.permission.CAMERA)
+                    != PackageManager.PERMISSION_GRANTED) {
+                checkPermission(2);
+            } else {
+                startActivityForResult(cameraIntent, 2);
             }
         });
         ((MainActivity) getActivity()).setTitle("הרשמה");
@@ -109,23 +105,23 @@ public class RegisterFragment extends Fragment {
     }
 
     private void initUI() {
-        go = (TextView) view.findViewById(R.id.go);
-        exist_user = (TextView) view.findViewById(R.id.exist_user);
-        confirm_btn = (TextView) view.findViewById(R.id.confirm_btn);
-        fName = (EditText) view.findViewById(R.id.f_name);
-        tz = (EditText) view.findViewById(R.id.tz);
-        confirm_num = (EditText) view.findViewById(R.id.confirm_num);
-        lName = (EditText) view.findViewById(R.id.l_name);
-        phone = (EditText) view.findViewById(R.id.phone);
-        confirmPass = (EditText) view.findViewById(R.id.confirm_pass);
-        pass = (EditText) view.findViewById(R.id.pass);
-        email = (EditText) view.findViewById(R.id.email);
-        street = (EditText) view.findViewById(R.id.street);
-        city = (EditText) view.findViewById(R.id.city);
-        homeNum = (EditText) view.findViewById(R.id.home_num);
-        apartmentNum = (EditText) view.findViewById(R.id.apartment_num);
-        check = (CheckBox) view.findViewById(R.id.check);
-        confirm_number_layout = (LinearLayout) view.findViewById(R.id.confirm_number_layout);
+        go = view.findViewById(R.id.go);
+        exist_user = view.findViewById(R.id.exist_user);
+        confirm_btn = view.findViewById(R.id.confirm_btn);
+        fName = view.findViewById(R.id.f_name);
+        tz = view.findViewById(R.id.tz);
+        confirm_num = view.findViewById(R.id.confirm_num);
+        lName = view.findViewById(R.id.l_name);
+        phone = view.findViewById(R.id.phone);
+        confirmPass = view.findViewById(R.id.confirm_pass);
+        pass = view.findViewById(R.id.pass);
+        email = view.findViewById(R.id.email);
+        street = view.findViewById(R.id.street);
+        city = view.findViewById(R.id.city);
+        homeNum = view.findViewById(R.id.home_num);
+        apartmentNum = view.findViewById(R.id.apartment_num);
+        check = view.findViewById(R.id.check);
+        confirm_number_layout = view.findViewById(R.id.confirm_number_layout);
 
         confirm_btn.setOnClickListener(v -> confirmPhoneServer());
 
@@ -178,7 +174,8 @@ public class RegisterFragment extends Fragment {
         Request.getInstance().signUp(mContext, registrationModel,
                 isDataSuccess -> {
                     if (isDataSuccess) {
-                        ((MainActivity) getActivity()).openNewFragment(new TimerFragment(), "");
+                        confirm_number_layout.setVisibility(View.VISIBLE);
+//                        ((MainActivity) getActivity()).openNewFragment(new TimerFragment(), "");
                     }
                 });
     }
@@ -250,14 +247,14 @@ public class RegisterFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
-            ImageView imageView = (ImageView) view.findViewById(R.id.pic_tz);
+            ImageView imageView = view.findViewById(R.id.pic_tz);
             Log.d(",,,", "  ssas  ");
             final Bitmap bitmap = (Bitmap) data.getExtras().get("data");
 
             imageView.setImageBitmap(Constants.getResizedBitmap(bitmap, Constants.getScreenWidth(getActivity())));
             base64TZ = convertBmpToBase64(bitmap);
         } else if (requestCode == 2 && resultCode == Activity.RESULT_OK) {
-            ImageView imageView = (ImageView) view.findViewById(R.id.pic_self);
+            ImageView imageView = view.findViewById(R.id.pic_self);
             final Bitmap bitmap = (Bitmap) data.getExtras().get("data");
             imageView.setImageBitmap(Constants.getResizedBitmap(bitmap, Constants.getScreenWidth(getActivity())));
             base64Self = convertBmpToBase64(bitmap);
