@@ -3,18 +3,16 @@ package com.bringit.orders.activities;
 import android.os.Bundle;
 import android.view.View;
 
-import com.bringit.orders.R;
-import com.bringit.orders.databinding.ActivityMainBinding;
-import com.bringit.orders.utils.Constants;
-
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.NavGraph;
 import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
+
+import com.bringit.orders.R;
+import com.bringit.orders.databinding.ActivityMainBinding;
+import com.bringit.orders.utils.Constants;
 
 import static com.bringit.orders.utils.SharedPrefs.getBooleanData;
 
@@ -71,19 +69,6 @@ public class MainActivity extends AppCompatActivity {
         navController.setGraph(graph);
 
         NavigationUI.setupWithNavController(binding.bottomNavView, navController);
-    }
-
-    public void openNewFragment(final Fragment fragment, final String tag) {
-        androidx.fragment.app.FragmentManager manager = getSupportFragmentManager();
-//        for(int i = 0; i < manager.getBackStackEntryCount(); ++i) {
-//            manager.popBackStack();
-//        }
-        FragmentTransaction transaction = manager.beginTransaction();
-//        transaction.replace(R.id.fragment_container, fragment, tag);
-        // transaction.addToBackStack(null);
-        transaction.commit();
-
-        Constants.closeMenu(binding.lMenu.menuContent);
     }
 
     public void forceCrash(View view) {
@@ -152,11 +137,6 @@ public class MainActivity extends AppCompatActivity {
 //        Constants.closeMenu(menuContent);
 //
 //    }
-
-    public void setTitle(String titleTxt) {
-//        title.setText(titleTxt);
-    }
-
 
 //    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 //        if (requestCode == 1) {

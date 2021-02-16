@@ -69,6 +69,87 @@ public class Request {
         network.sendPostRequest(context, jsonObject, Network.RequestName.LOG_IN);
     }
 
+    public void resetPassword(final Context context, String phone, final RequestCallBackSuccess listener) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("phone", phone);
+
+            Log.d("send data: ", jsonObject.toString());
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Network network = new Network(new Network.NetworkCallBack() {
+            @Override
+            public void onDataDone(JSONObject json) {
+                Log.d("response: ", json.toString());
+                try {
+                    if (json.has("errorCode") && json.getInt("errorCode") == 1) {
+                        listener.onDataDone(false);
+                        openAlertMsg(context, json);
+                    } else {
+                        listener.onDataDone(true);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onDataError(JSONObject json) {
+//                openAlertMsg(context, json);
+                listener.onDataDone(false);
+
+            }
+        });
+        network.sendPostRequest(context, jsonObject, Network.RequestName.RESET_PASSWORD);
+    }
+
+    public void confirmResetPassword(final Context context, String password, String phone, String code, final RequestCallBackSuccess listener) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("phone", phone);
+            jsonObject.put("password", password);
+            jsonObject.put("code", code);
+
+            Log.d("send data: ", jsonObject.toString());
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Network network = new Network(new Network.NetworkCallBack() {
+            @Override
+            public void onDataDone(JSONObject json) {
+                Log.d("response: ", json.toString());
+                try {
+                    initPref(json.getJSONObject("user"));
+                    Constants.saveLoggedIn(json.getString("utoken"), (json.getJSONObject("user")).getString("id"));
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    if (json.has("errorCode") && json.getInt("errorCode") == 1) {
+                        listener.onDataDone(false);
+                        openAlertMsg(context, json);
+                    } else {
+                        listener.onDataDone(true);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onDataError(JSONObject json) {
+//                openAlertMsg(context, json);
+                listener.onDataDone(false);
+
+            }
+        });
+        network.sendPostRequest(context, jsonObject, Network.RequestName.CONFIRM_RESET_PASSWORD);
+    }
+
     public void signUp(final Context context, RegistrationModel registrationModel, final RequestCallBackSuccess listener) {
         Gson gson = new Gson();
         JSONObject jsonObject = null;
@@ -77,6 +158,8 @@ public class Request {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+        Log.d("PARAMS", jsonObject.toString());
 
         Network network = new Network(new Network.NetworkCallBack() {
             @Override
@@ -122,12 +205,9 @@ public class Request {
                     e.printStackTrace();
                 }
                 try {
-                    if (json.has("errorCode") && json.getInt("errorCode") == 1) {
-                        listener.onDataDone(false);
-                        openAlertMsg(context, json);
-                    } else {
-                        listener.onDataDone(true);
-                    }
+                    if (!json.getBoolean("status")) openAlertMsg(context, json);
+
+                    listener.onDataDone(json.getBoolean("status"));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

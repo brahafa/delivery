@@ -40,6 +40,7 @@ public class Network {
 
     public enum RequestName {
         LOG_IN, SIGN_UP, CONFIRM_USER,
+        RESET_PASSWORD, CONFIRM_RESET_PASSWORD,
         ADD_ORDER, GET_DELIVERS_ORDERS,
         GET_ORDER_DETAILS_BY_ID, CONFIRM_ORDER_DELIVERING
     }
@@ -126,6 +127,12 @@ public class Network {
                 break;
             case LOG_IN:
                 url += "login";
+                break;
+            case RESET_PASSWORD:
+                url += "resetPassword";
+                break;
+            case CONFIRM_RESET_PASSWORD:
+                url += "confirmResetPassword";
                 break;
             case CONFIRM_ORDER_DELIVERING:
                 url += "confirmOrderDelivering";

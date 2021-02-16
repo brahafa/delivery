@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph_main"
@@ -9,12 +8,12 @@
     <!--    history     -->
     <fragment
         android:id="@+id/historyFragment"
-        android:label="הסטוריה"
         android:name="com.bringit.orders.fragments.CurrentFragment"
+        android:label="הסטוריה"
         tools:layout="@layout/fragment_current">
         <argument
-            android:defaultValue="finished"
             android:name="page_type"
+            android:defaultValue="finished"
             app:argType="string" />
         <action
             android:id="@+id/action_currentOrdersFragment_to_orderDetailsFragment"
@@ -31,12 +30,12 @@
     <!--    current     -->
     <fragment
         android:id="@+id/currentOrdersFragment"
-        android:label="הזמנות"
         android:name="com.bringit.orders.fragments.CurrentFragment"
+        android:label="הזמנות"
         tools:layout="@layout/fragment_current">
         <argument
-            android:defaultValue="active"
             android:name="page_type"
+            android:defaultValue="active"
             app:argType="string" />
         <action
             android:id="@+id/action_currentOrdersFragment_to_orderDetailsFragment"
@@ -54,15 +53,15 @@
     <!--    timer     -->
     <fragment
         android:id="@+id/timerFragment"
-        android:label="פתיחת יום"
         android:name="com.bringit.orders.fragments.TimerFragment"
+        android:label="פתיחת יום"
         tools:layout="@layout/fragment_timer" />
 
     <!--    details     -->
     <fragment
         android:id="@+id/orderDetailsFragment"
-        android:label="הזמנות"
         android:name="com.bringit.orders.fragments.OrderDetailsFragment"
+        android:label="הזמנות"
         tools:layout="@layout/fragment_order_details">
         <argument
             android:name="order_item"
@@ -75,8 +74,8 @@
     <!--    details finished     -->
     <fragment
         android:id="@+id/orderDetailsFinishedFragment"
-        android:label="הסטוריה"
         android:name="com.bringit.orders.fragments.OrderDetailsFragment"
+        android:label="הסטוריה"
         tools:layout="@layout/fragment_order_details">
         <argument
             android:name="order_item"
@@ -89,8 +88,8 @@
     <!--    login     -->
     <fragment
         android:id="@+id/loginFragment"
-        android:label="כניסת משתמש"
         android:name="com.bringit.orders.fragments.LogInFragment"
+        android:label="כניסת משתמש"
         tools:layout="@layout/fragment_log_in">
         <action
             android:id="@+id/action_loginFragment_to_timerFragment"
@@ -101,26 +100,46 @@
         <action
             android:id="@+id/action_loginFragment_to_registerFragment"
             app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_forgotPasswordFragment"
+            app:destination="@id/forgotPasswordFragment" />
     </fragment>
 
     <!--    register     -->
     <fragment
         android:id="@+id/registerFragment"
-        android:label="הרשמה"
         android:name="com.bringit.orders.fragments.RegisterFragment"
+        android:label="הרשמה"
         tools:layout="@layout/fragment_register">
         <action
             android:id="@+id/action_registerFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_registerFragment_to_timerFragment"
+            app:destination="@id/timerFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/nav_graph_main"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/forgotPasswordFragment"
+        android:name="com.bringit.orders.fragments.ForgotPasswordFragment"
+        android:label="Forgot Password"
+        tools:layout="@layout/fragment_forgot_password">
+
+        <action
+            android:id="@+id/action_forgotPasswordFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/profileFragment"
-        android:label="פרטים אישיים"
-        android:name="com.bringit.orders.fragments.ProfileFragment" />
+        android:name="com.bringit.orders.fragments.ProfileFragment"
+        android:label="פרטים אישיים" />
     <fragment
         android:id="@+id/contactUsFragment"
-        android:label="ContactUsFragment"
-        android:name="com.bringit.orders.fragments.ContactUsFragment" />
+        android:name="com.bringit.orders.fragments.ContactUsFragment"
+        android:label="ContactUsFragment" />
 
 </navigation>

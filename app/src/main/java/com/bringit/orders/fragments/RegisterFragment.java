@@ -15,11 +15,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -27,8 +22,8 @@ import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.bringit.orders.R;
 import com.bringit.orders.activities.MainActivity;
+import com.bringit.orders.databinding.FragmentRegisterBinding;
 import com.bringit.orders.models.RegistrationModel;
 import com.bringit.orders.network.Request;
 import com.bringit.orders.utils.Constants;
@@ -45,29 +40,20 @@ import static com.bringit.orders.utils.SharedPrefs.saveData;
  * A simple {@link Fragment} subclass.
  */
 public class RegisterFragment extends Fragment {
-    private EditText street, city, homeNum, apartmentNum, pass, confirmPass, email, fName, lName, phone, tz, confirm_num;
-    private CheckBox check;
-    TextView go, confirm_btn, exist_user;
-    View view;
-    String base64Self, base64TZ;
-    private LinearLayout confirm_number_layout;
-
-    public RegisterFragment() {
-        // Required empty public constructor
-    }
 
     private Context mContext;
 
+    private FragmentRegisterBinding binding;
+
+    String base64Self, base64TZ;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_register, container, false);
-        initUI();
-        ImageView camera1 = view.findViewById(R.id.take_pic_tz);
-        ImageView camera2 = view.findViewById(R.id.take_pic_self);
+        binding = FragmentRegisterBinding.inflate(inflater, container, false);
 
-        camera1.setOnClickListener(v -> {
+        initUI();
+        binding.takePicTz.setOnClickListener(v -> {
             Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             Log.d(",,,", "  camera1  ");
             //cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -79,7 +65,7 @@ public class RegisterFragment extends Fragment {
             }
         });
 
-        camera2.setOnClickListener(v -> {
+        binding.takePicSelf.setOnClickListener(v -> {
             Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             Log.d(",,,", "  camera2  ");
             //cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -90,10 +76,9 @@ public class RegisterFragment extends Fragment {
                 startActivityForResult(cameraIntent, 2);
             }
         });
-        ((MainActivity) getActivity()).setTitle("הרשמה");
         ((MainActivity) getActivity()).setBottomNavigationVisibility(8);
 
-        return view;
+        return binding.getRoot();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -105,43 +90,27 @@ public class RegisterFragment extends Fragment {
     }
 
     private void initUI() {
-        go = view.findViewById(R.id.go);
-        exist_user = view.findViewById(R.id.exist_user);
-        confirm_btn = view.findViewById(R.id.confirm_btn);
-        fName = view.findViewById(R.id.f_name);
-        tz = view.findViewById(R.id.tz);
-        confirm_num = view.findViewById(R.id.confirm_num);
-        lName = view.findViewById(R.id.l_name);
-        phone = view.findViewById(R.id.phone);
-        confirmPass = view.findViewById(R.id.confirm_pass);
-        pass = view.findViewById(R.id.pass);
-        email = view.findViewById(R.id.email);
-        street = view.findViewById(R.id.street);
-        city = view.findViewById(R.id.city);
-        homeNum = view.findViewById(R.id.home_num);
-        apartmentNum = view.findViewById(R.id.apartment_num);
-        check = view.findViewById(R.id.check);
-        confirm_number_layout = view.findViewById(R.id.confirm_number_layout);
 
-        confirm_btn.setOnClickListener(v -> confirmPhoneServer());
+        binding.confirmBtn.setOnClickListener(v -> confirmPhoneServer());
 
-        go.setOnClickListener(v -> {
+        binding.go.setOnClickListener(v -> {
             saveDataToPref();
             if (checkValidation()) {
                 sendProfileToServer();
             }
         });
-        exist_user.setOnClickListener(view -> NavHostFragment.findNavController(this)
+        binding.existUser.setOnClickListener(view -> NavHostFragment.findNavController(this)
                 .navigate(RegisterFragmentDirections.actionRegisterFragmentToLoginFragment()));
         initDataFromPref();
 
     }
 
     private void confirmPhoneServer() {
-        Request.getInstance().confirmUser(mContext, phone.getText().toString(), confirm_num.getText().toString(),
+        Request.getInstance().confirmUser(mContext, binding.phone.getText().toString(), binding.confirmNum.getText().toString(),
                 isDataSuccess -> {
                     if (isDataSuccess) {
-                        ((MainActivity) getActivity()).openNewFragment(new TimerFragment(), "");
+                        NavHostFragment.findNavController(this)
+                                .navigate(RegisterFragmentDirections.actionRegisterFragmentToTimerFragment());
                     }
                 });
     }
@@ -152,73 +121,69 @@ public class RegisterFragment extends Fragment {
 
         RegistrationModel registrationModel = new RegistrationModel();
 
-        registrationModel.setName(fName.getText().toString());
-        registrationModel.setLastName(lName.getText().toString());
-        registrationModel.setPhone(phone.getText().toString());
-        registrationModel.setmEmail(email.getText().toString());
-        registrationModel.setmIdentity(tz.getText().toString());
-        registrationModel.setmPassword(pass.getText().toString());
-        registrationModel.setmConfirmPass(confirmPass.getText().toString());
+        registrationModel.setName(binding.fName.getText().toString());
+        registrationModel.setLastName(binding.lName.getText().toString());
+        registrationModel.setPhone(binding.phone.getText().toString());
+        registrationModel.setmEmail(binding.email.getText().toString());
+        registrationModel.setmIdentity(binding.tz.getText().toString());
+        registrationModel.setmPassword(binding.pass.getText().toString());
+        registrationModel.setmConfirmPass(binding.confirmPass.getText().toString());
 
-        registrationModel.getAddress().setCityName(city.getText().toString());
-        registrationModel.getAddress().setStreet(street.getText().toString());
-        registrationModel.getAddress().setHouseNum(homeNum.getText().toString());
-        registrationModel.getAddress().setAptNum(apartmentNum.getText().toString());
+        registrationModel.getAddress().setCityName(binding.city.getText().toString());
+        registrationModel.getAddress().setStreet(binding.street.getText().toString());
+        registrationModel.getAddress().setHouseNum(binding.homeNum.getText().toString());
+        registrationModel.getAddress().setAptNum(binding.apartmentNum.getText().toString());
 
         registrationModel.setmSelfImage("base64Self");
         registrationModel.setmIdentityImage("base64TZ");
 //            data.put("self_image",base64Self);
 //            data.put("identity_image",base64TZ);
-        Log.d("PARAMS", data.toString());
 
         Request.getInstance().signUp(mContext, registrationModel,
                 isDataSuccess -> {
-                    if (isDataSuccess) {
-                        confirm_number_layout.setVisibility(View.VISIBLE);
-//                        ((MainActivity) getActivity()).openNewFragment(new TimerFragment(), "");
-                    }
+                    if (isDataSuccess) binding.confirmNumberLayout.setVisibility(View.VISIBLE);
                 });
     }
 
     private boolean checkValidation() {
-        if (fName.getText().toString().equals("")) {
+        if (binding.fName.getText().toString().equals("")) {
             Constants.openAlertDialog(getActivity(), "חסרים פרטים", "נא מלא שם פרטי");
             return false;
         }
-        if (lName.getText().toString().equals("")) {
+        if (binding.lName.getText().toString().equals("")) {
             Constants.openAlertDialog(getActivity(), "חסרים פרטים", "נא מלא שם משפחה");
             return false;
         }
-        if (phone.getText().toString().equals("")) {
+        if (binding.phone.getText().toString().equals("")) {
             Constants.openAlertDialog(getActivity(), "חסרים פרטים", "נא מלא טלפון");
             return false;
         }
-        if (tz.getText().toString().equals("")) {
+        if (binding.tz.getText().toString().equals("")) {
             Constants.openAlertDialog(getActivity(), "חסרים פרטים", "נא מלא מס זהות");
             return false;
         }
-        if (city.getText().toString().equals("")) {
+        if (binding.city.getText().toString().equals("")) {
             Constants.openAlertDialog(getActivity(), "חסרים פרטים", "נא מלא עיר");
             return false;
         }
-        if (street.getText().toString().equals("")) {
+        if (binding.street.getText().toString().equals("")) {
             Constants.openAlertDialog(getActivity(), "חסרים פרטים", "נא מלא רחוב");
             return false;
         }
-        if (apartmentNum.getText().toString().equals("")) {
+        if (binding.apartmentNum.getText().toString().equals("")) {
             Constants.openAlertDialog(getActivity(), "חסרים פרטים", "נא מלא מס בית");
             return false;
         }
 
-        if (pass.getText().toString().equals("")) {
+        if (binding.pass.getText().toString().equals("")) {
             Constants.openAlertDialog(getActivity(), "חסרים פרטים", "נא מלא סיסמה");
             return false;
         }
-        if (!pass.getText().toString().equals(confirmPass.getText().toString())) {
+        if (!binding.pass.getText().toString().equals(binding.confirmPass.getText().toString())) {
             Constants.openAlertDialog(getActivity(), "חסרים פרטים", "נא אמת סיסמתך");
             return false;
         }
-        if (email.getText().toString().equals("") || !email.getText().toString().contains("@")) {
+        if (binding.email.getText().toString().equals("") || !binding.email.getText().toString().contains("@")) {
             Constants.openAlertDialog(getActivity(), "חסרים פרטים", "נא מלא רחוב");
             return false;
         }
@@ -230,38 +195,26 @@ public class RegisterFragment extends Fragment {
             Constants.openAlertDialog(getActivity(), "חסרים פרטים", "נא צלם תעודת מזהה");
             return false;
         }
-        if (!check.isChecked()) {
+        if (!binding.check.isChecked()) {
             Constants.openAlertDialog(getActivity(), "", "נא אשר את תנאי השימוש");
             return false;
         }
         return true;
     }
 
-    /**
-     * The activity returns with the photo.
-     *
-     * @param requestCode
-     * @param resultCode
-     * @param data
-     */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
-            ImageView imageView = view.findViewById(R.id.pic_tz);
             Log.d(",,,", "  ssas  ");
             final Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-
-            imageView.setImageBitmap(Constants.getResizedBitmap(bitmap, Constants.getScreenWidth(getActivity())));
+            binding.picTz.setImageBitmap(Constants.getResizedBitmap(bitmap, Constants.getScreenWidth(getActivity())));
             base64TZ = convertBmpToBase64(bitmap);
         } else if (requestCode == 2 && resultCode == Activity.RESULT_OK) {
-            ImageView imageView = view.findViewById(R.id.pic_self);
             final Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-            imageView.setImageBitmap(Constants.getResizedBitmap(bitmap, Constants.getScreenWidth(getActivity())));
+            binding.picSelf.setImageBitmap(Constants.getResizedBitmap(bitmap, Constants.getScreenWidth(getActivity())));
             base64Self = convertBmpToBase64(bitmap);
-
         } else {
-            Toast.makeText(getActivity(), "Image Capture Failed", Toast.LENGTH_SHORT)
-                    .show();
+            Toast.makeText(getActivity(), "Image Capture Failed", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -284,51 +237,51 @@ public class RegisterFragment extends Fragment {
 
 
     private void saveDataToPref() {
-        saveData(Constants.F_NAME_PREF, fName.getText().toString());
-        saveData(Constants.L_NAME_PREF, lName.getText().toString());
-        saveData(Constants.PHONE_PREF, phone.getText().toString());
-        saveData(Constants.EMAIL_PREF, email.getText().toString());
-        saveData(Constants.PASS_PREF, pass.getText().toString());
+        saveData(Constants.F_NAME_PREF, binding.fName.getText().toString());
+        saveData(Constants.L_NAME_PREF, binding.lName.getText().toString());
+        saveData(Constants.PHONE_PREF, binding.phone.getText().toString());
+        saveData(Constants.EMAIL_PREF, binding.email.getText().toString());
+        saveData(Constants.PASS_PREF, binding.pass.getText().toString());
 
-        saveData(Constants.STREET, street.getText().toString());
-        saveData(Constants.CITY, city.getText().toString());
-        saveData(Constants.HOME, homeNum.getText().toString());
-        saveData(Constants.ENTER, apartmentNum.getText().toString());
-        saveData(Constants.T_Z, tz.getText().toString());
+        saveData(Constants.STREET, binding.street.getText().toString());
+        saveData(Constants.CITY, binding.city.getText().toString());
+        saveData(Constants.HOME, binding.homeNum.getText().toString());
+        saveData(Constants.ENTER, binding.apartmentNum.getText().toString());
+        saveData(Constants.T_Z, binding.tz.getText().toString());
     }
 
     private void initDataFromPref() {
         if (getData(Constants.F_NAME_PREF) != null) {
-            fName.setText(getData(Constants.F_NAME_PREF));
+            binding.fName.setText(getData(Constants.F_NAME_PREF));
         }
         if (getData(Constants.L_NAME_PREF) != null) {
-            lName.setText(getData(Constants.L_NAME_PREF));
+            binding.lName.setText(getData(Constants.L_NAME_PREF));
         }
         if (getData(Constants.PHONE_PREF) != null) {
-            phone.setText(getData(Constants.PHONE_PREF));
+            binding.phone.setText(getData(Constants.PHONE_PREF));
         }
         if (getData(Constants.STREET) != null) {
-            street.setText(getData(Constants.STREET));
+            binding.street.setText(getData(Constants.STREET));
         }
         if (getData(Constants.CITY) != null) {
-            city.setText(getData(Constants.CITY));
+            binding.city.setText(getData(Constants.CITY));
         }
 
         if (getData(Constants.HOME) != null) {
-            homeNum.setText(getData(Constants.HOME));
+            binding.homeNum.setText(getData(Constants.HOME));
         }
 
         if (getData(Constants.ENTER) != null) {
-            apartmentNum.setText(getData(Constants.ENTER));
+            binding.apartmentNum.setText(getData(Constants.ENTER));
         }
         if (getData(Constants.PASS_PREF) != null) {
-            pass.setText(getData(Constants.PASS_PREF));
+            binding.pass.setText(getData(Constants.PASS_PREF));
         }
         if (getData(Constants.EMAIL_PREF) != null) {
-            email.setText(getData(Constants.EMAIL_PREF));
+            binding.email.setText(getData(Constants.EMAIL_PREF));
         }
         if (getData(Constants.T_Z) != null) {
-            tz.setText(getData(Constants.T_Z));
+            binding.tz.setText(getData(Constants.T_Z));
         }
     }
 
