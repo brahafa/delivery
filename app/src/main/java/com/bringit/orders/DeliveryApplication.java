@@ -22,8 +22,8 @@ public class DeliveryApplication extends Application {
     public void onCreate() {
         super.onCreate();
         _instance = this;
-
-//        Fabric.with(this, new Crashlytics());
+//        FirebaseApp.initializeApp(getApplicationContext());
+//        FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(true);
         SharedPrefs.loadPrefs(this);
 
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
