@@ -167,7 +167,6 @@ public class MainActivity extends AppCompatActivity {
                     // functionality that depends on this permission.
                     Toast.makeText(MainActivity.this, "Permission denied", Toast.LENGTH_SHORT).show();
                 }
-                return;
             }
 
             // other 'case' lines to check for other

@@ -42,8 +42,8 @@ public class OrderDetailsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        pageType = OrderDetailsFragmentArgs.fromBundle(getArguments()).getPageType();
-        mOrderItem = OrderDetailsFragmentArgs.fromBundle(getArguments()).getOrderItem();
+        pageType = OrderDetailsFragmentArgs.fromBundle(requireArguments()).getPageType();
+        mOrderItem = OrderDetailsFragmentArgs.fromBundle(requireArguments()).getOrderItem();
     }
 
     @Override

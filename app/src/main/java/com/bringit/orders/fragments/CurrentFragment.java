@@ -11,6 +11,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.GridLayoutManager;
+
 import com.bringit.orders.activities.MainActivity;
 import com.bringit.orders.adapters.AddressRV;
 import com.bringit.orders.databinding.FragmentCurrentBinding;
@@ -26,11 +31,6 @@ import org.json.JSONException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
-import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.GridLayoutManager;
 
 import static android.content.Context.ACTIVITY_SERVICE;
 
@@ -95,21 +95,24 @@ public class CurrentFragment extends Fragment {
 
     private boolean isServiceRunning(String serviceName) {
         boolean serviceRunning = false;
-        ActivityManager am = (ActivityManager) getActivity().getSystemService(ACTIVITY_SERVICE);
-        List<ActivityManager.RunningServiceInfo> l = am.getRunningServices(50);
-        Iterator<ActivityManager.RunningServiceInfo> i = l.iterator();
-        while (i.hasNext()) {
-            ActivityManager.RunningServiceInfo runningServiceInfo = i
-                    .next();
+        if (getActivity() != null) {
+            ActivityManager am = (ActivityManager) requireActivity().getSystemService(ACTIVITY_SERVICE);
+            List<ActivityManager.RunningServiceInfo> l = am.getRunningServices(50);
+            Iterator<ActivityManager.RunningServiceInfo> i = l.iterator();
+            while (i.hasNext()) {
+                ActivityManager.RunningServiceInfo runningServiceInfo = i
+                        .next();
 
-            if (runningServiceInfo.service.getClassName().equals(serviceName)) {
-                serviceRunning = true;
+                if (runningServiceInfo.service.getClassName().equals(serviceName)) {
+                    serviceRunning = true;
 
-                if (runningServiceInfo.foreground) {
-                    //service run in foreground
+                    if (runningServiceInfo.foreground) {
+                        //service run in foreground
+                    }
                 }
             }
         }
+
         return serviceRunning;
     }
 
