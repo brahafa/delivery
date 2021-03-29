@@ -14,6 +14,7 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.bringit.orders.BuildConfig;
 import com.bringit.orders.utils.Constants;
 import com.bringit.orders.utils.SharedPrefs;
 import com.bringit.orders.utils.Utils;
@@ -35,8 +36,24 @@ public class Network {
     private final String SESSION_COOKIE = "Apikey";
 
     private NetworkCallBack listener;
-    public static String BASE_URL = "https://api.bringit.org.il/?apiCtrl=deliver&do="; //dev
-    private final String BASE_URL_2 = "https://api2.bringit.org.il/"; //dev
+
+    private String BASE_URL;
+    private String BASE_URL_2;
+
+    private final String BASE_URL_DEV = "https://api.dev.bringit.org.il/?apiCtrl=";
+    private final String BASE_URL_2_DEV = "https://api2.dev.bringit.org.il/";
+
+    private final String BASE_URL_TEST = "https://api.test.bringit.org.il/?apiCtrl=";
+    private final String BASE_URL_2_TEST = "https://api2.test.bringit.org.il/";
+
+    private final String BASE_URL_STAGE = "https://api.stg.bringit.co.il/?apiCtrl=";
+    private final String BASE_URL_2_STAGE = "https://api2.stg.bringit.co.il/";
+
+    private final String BASE_URL_PROD = "https://api.bringit.co.il/?apiCtrl=";
+    private final String BASE_URL_2_PROD = "https://api2.bringit.co.il/";
+
+    private final String BASE_URL_LOCAL = "http://192.168.5.7:80/bringit_backend/?apiCtrl=";
+    private final String BASE_URL_2_LOCAL = "http://192.168.5.7:80/api2/";
 
     public enum RequestName {
         LOG_IN, SIGN_UP, CONFIRM_USER,
@@ -46,6 +63,30 @@ public class Network {
     }
 
     Network(NetworkCallBack listener) {
+        switch (BuildConfig.BUILD_TYPE) {
+            case "debug":
+            default:
+                BASE_URL = BASE_URL_DEV;
+                BASE_URL_2 = BASE_URL_2_DEV;
+                break;
+            case "debugTest":
+                BASE_URL = BASE_URL_TEST;
+                BASE_URL_2 = BASE_URL_2_TEST;
+                break;
+            case "debugStage":
+                BASE_URL = BASE_URL_STAGE;
+                BASE_URL_2 = BASE_URL_2_STAGE;
+                break;
+            case "localHost":
+                BASE_URL = BASE_URL_LOCAL;
+                BASE_URL_2 = BASE_URL_2_LOCAL;
+                break;
+            case "release":
+            case "debugLive":
+                BASE_URL = BASE_URL_PROD;
+                BASE_URL_2 = BASE_URL_2_PROD;
+                break;
+        }
         this.listener = listener;
     }
 

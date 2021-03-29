@@ -18,9 +18,6 @@ import com.bringit.orders.models.ItemModel;
 import com.bringit.orders.models.OrderDetailsModel;
 import com.bringit.orders.network.Request;
 import com.bringit.orders.utils.Constants;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
 import java.util.List;
 import java.util.Locale;
 
@@ -36,8 +33,6 @@ public class OrderDetailsFragment extends Fragment {
     private Address mOrderItem;
     private String pageType;
 
-    final FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
