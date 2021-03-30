@@ -54,6 +54,14 @@ android {
         }
     }
 
+    flavorDimensions 'default'
+    productFlavors {
+        delivery {
+            dimension 'default'
+            versionName "1.0.25.1"
+        }
+    }
+
     buildFeatures {
         viewBinding = true
     }
@@ -61,6 +69,15 @@ android {
     compileOptions {
         sourceCompatibility = 1.8
         targetCompatibility = 1.8
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            def builtType = variant.buildType.name
+            def versionName = variant.versionName
+            def flavor = variant.flavorName
+            outputFileName = "${flavor}-${builtType}-${versionName}.apk"
+        }
     }
 }
 
