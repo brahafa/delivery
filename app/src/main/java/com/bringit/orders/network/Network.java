@@ -40,19 +40,19 @@ public class Network {
     private String BASE_URL;
     private String BASE_URL_2;
 
-    private final String BASE_URL_DEV = "https://api.dev.bringit.org.il/?apiCtrl=";
+    private final String BASE_URL_DEV = "https://api.dev.bringit.org.il/?apiCtrl=deliver&do=";
     private final String BASE_URL_2_DEV = "https://api2.dev.bringit.org.il/";
 
-    private final String BASE_URL_TEST = "https://api.test.bringit.org.il/?apiCtrl=";
+    private final String BASE_URL_TEST = "https://api.test.bringit.org.il/?apiCtrl=deliver&do=";
     private final String BASE_URL_2_TEST = "https://api2.test.bringit.org.il/";
 
-    private final String BASE_URL_STAGE = "https://api.stg.bringit.co.il/?apiCtrl=";
+    private final String BASE_URL_STAGE = "https://api.stg.bringit.co.il/?apiCtrl=deliver&do=";
     private final String BASE_URL_2_STAGE = "https://api2.stg.bringit.co.il/";
 
-    private final String BASE_URL_PROD = "https://api.bringit.co.il/?apiCtrl=";
+    private final String BASE_URL_PROD = "https://api.bringit.co.il/?apiCtrl=deliver&do=";
     private final String BASE_URL_2_PROD = "https://api2.bringit.co.il/";
 
-    private final String BASE_URL_LOCAL = "http://192.168.5.7:80/bringit_backend/?apiCtrl=";
+    private final String BASE_URL_LOCAL = "http://192.168.5.7:80/bringit_backend/?apiCtrl=deliver&do=";
     private final String BASE_URL_2_LOCAL = "http://192.168.5.7:80/api2/";
 
     public enum RequestName {
