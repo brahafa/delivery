@@ -144,6 +144,7 @@ public class MyForeGroundService extends Service {
             manager.createNotificationChannel(chan);
 
             Intent intent = new Intent(this, MyForeGroundService.class);
+            intent.setAction(ACTION_STOP_FOREGROUND_SERVICE);
             PendingIntent servicePendingIntent = PendingIntent.getService(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
             NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID);
