@@ -49,7 +49,6 @@
         </action>
     </fragment>
 
-
     <!--    timer     -->
     <fragment
         android:id="@+id/timerFragment"
@@ -102,7 +101,11 @@
             app:destination="@id/registerFragment" />
         <action
             android:id="@+id/action_loginFragment_to_forgotPasswordFragment"
-            app:destination="@id/forgotPasswordFragment" />
+            app:destination="@id/forgotPasswordFragment">
+            <argument
+                android:name="phone_number"
+                app:argType="string" />
+        </action>
     </fragment>
 
     <!--    register     -->
@@ -122,11 +125,15 @@
             app:popUpToInclusive="true" />
     </fragment>
 
+    <!--    forgot pass     -->
     <fragment
         android:id="@+id/forgotPasswordFragment"
         android:name="com.bringit.orders.fragments.ForgotPasswordFragment"
         android:label="Forgot Password"
         tools:layout="@layout/fragment_forgot_password">
+        <argument
+            android:name="phone_number"
+            app:argType="string" />
 
         <action
             android:id="@+id/action_forgotPasswordFragment_to_loginFragment"

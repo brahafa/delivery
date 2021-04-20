@@ -86,10 +86,10 @@ public class Request {
                 try {
                     if (json.has("errorCode") && json.getInt("errorCode") == 1) {
                         listener.onDataDone(false);
-                        openAlertMsg(context, json);
                     } else {
                         listener.onDataDone(true);
                     }
+                    openAlertMsg(context, json);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -97,7 +97,7 @@ public class Request {
 
             @Override
             public void onDataError(JSONObject json) {
-//                openAlertMsg(context, json);
+                openAlertMsg(context, json);
                 listener.onDataDone(false);
 
             }

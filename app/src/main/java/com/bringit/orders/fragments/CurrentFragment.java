@@ -54,7 +54,7 @@ public class CurrentFragment extends Fragment {
         binding = FragmentCurrentBinding.inflate(inflater, container, false);
 
         initUI();
-        //  getActivity().startService(new Intent(getActivity(), MyLocationService.class));
+        //  mContext.startService(new Intent(mContext, MyLocationService.class));
 
         initOrderList();
 
@@ -64,7 +64,7 @@ public class CurrentFragment extends Fragment {
     private void initUI() {
 
         binding.rvOrders.setItemAnimator(new DefaultItemAnimator());
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 1);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext, 1);
         binding.rvOrders.setLayoutManager(gridLayoutManager);
 
         binding.dateBtn.setOnClickListener(view ->
@@ -90,12 +90,12 @@ public class CurrentFragment extends Fragment {
             binding.addOrder.setVisibility(View.GONE);
             binding.addOrderCode.setVisibility(View.GONE);
         }
-        ((MainActivity) getActivity()).setBottomNavigationVisibility(1);
+        ((MainActivity) mContext).setBottomNavigationVisibility(1);
     }
 
     private boolean isServiceRunning(String serviceName) {
         boolean serviceRunning = false;
-        if (getActivity() != null) {
+        if (mContext != null) {
             ActivityManager am = (ActivityManager) requireActivity().getSystemService(ACTIVITY_SERVICE);
             List<ActivityManager.RunningServiceInfo> l = am.getRunningServices(50);
             Iterator<ActivityManager.RunningServiceInfo> i = l.iterator();
@@ -141,7 +141,7 @@ public class CurrentFragment extends Fragment {
                         addresses.add(gson.fromJson(jsonArray.getString(i), Address.class));
                         orderId.append(addresses.get(i).getOrderId()).append(",");
                     }
-                    //    SharePref.getInstance(getActivity()).saveData("id", orderId.toString());
+                    //    SharePref.getInstance(mContext).saveData("id", orderId.toString());
                     //    initAllOrdersList(addresses);
                     initRV(addresses);
                 }
@@ -153,7 +153,7 @@ public class CurrentFragment extends Fragment {
 
     // init RV data
     private void initRV(List<Address> orders) {
-        AddressRV mAdapter = new AddressRV(orders, pageType, getActivity(), order -> {
+        AddressRV mAdapter = new AddressRV(orders, pageType, mContext, order -> {
             NavHostFragment.findNavController(this)
                     .navigate(CurrentFragmentDirections.actionCurrentOrdersFragmentToOrderDetailsFragment(order, pageType));
         });
@@ -174,13 +174,13 @@ public class CurrentFragment extends Fragment {
 
     private void stopService() {
         if (isServiceRunning("com.bringit.orders.services.MyForeGroundService")) {
-            Intent intent = new Intent(getActivity(), MyForeGroundService.class);
+            Intent intent = new Intent(mContext, MyForeGroundService.class);
             intent.setAction(MyForeGroundService.ACTION_STOP_FOREGROUND_SERVICE);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                getActivity().startForegroundService(intent);
+                mContext.startForegroundService(intent);
                 Log.d("START333", MyForeGroundService.ACTION_STOP_FOREGROUND_SERVICE);
             } else {
-                getActivity().startService(intent);
+                mContext.startService(intent);
                 Log.d("START222", MyForeGroundService.ACTION_STOP_FOREGROUND_SERVICE);
 
             }
@@ -189,14 +189,14 @@ public class CurrentFragment extends Fragment {
 
     private void startService() {
         if (!isServiceRunning("com.bringit.orders.services.MyForeGroundService")) {
-            Intent intent = new Intent(getActivity(), MyForeGroundService.class);
+            Intent intent = new Intent(mContext, MyForeGroundService.class);
             intent.setAction(MyForeGroundService.ACTION_START_FOREGROUND_SERVICE);
-            // getActivity().startService(intent);
+            // mContext.startService(intent);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                getActivity().startForegroundService(intent);
+                mContext.startForegroundService(intent);
                 Log.d("START111", MyForeGroundService.ACTION_START_FOREGROUND_SERVICE);
             } else {
-                getActivity().startService(intent);
+                mContext.startService(intent);
                 Log.d("START000", MyForeGroundService.ACTION_START_FOREGROUND_SERVICE);
 
             }

@@ -67,13 +67,8 @@ public class LogInFragment extends Fragment {
             if (binding.phone.getText().toString().equals("")) {
                 Constants.openAlertDialog(getActivity(), "חסרים פרטים", "נא מלא טלפון");
             } else {
-                Request.getInstance().resetPassword(mContext, binding.phone.getText().toString(),
-                        isDataSuccess -> {
-                            if (isDataSuccess) {
-                                NavHostFragment.findNavController(this)
-                                        .navigate(LogInFragmentDirections.actionLoginFragmentToForgotPasswordFragment());
-                            }
-                        });
+                NavHostFragment.findNavController(this)
+                        .navigate(LogInFragmentDirections.actionLoginFragmentToForgotPasswordFragment(binding.phone.getText().toString()));
             }
         });
         ((MainActivity) getActivity()).setBottomNavigationVisibility(8);

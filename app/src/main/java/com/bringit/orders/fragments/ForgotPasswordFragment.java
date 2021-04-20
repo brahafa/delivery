@@ -23,8 +23,14 @@ public class ForgotPasswordFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        String phoneNumber = ForgotPasswordFragmentArgs.fromBundle(requireArguments()).getPhoneNumber();
+
+        sendSms(phoneNumber);
+
         binding = FragmentForgotPasswordBinding.inflate(inflater, container, false);
 
+        binding.phone.setText(phoneNumber);
 
         binding.go.setOnClickListener(v -> {
 
@@ -48,6 +54,11 @@ public class ForgotPasswordFragment extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         mContext = context;
+    }
+
+    private void sendSms(String phoneNumber) {
+        Request.getInstance().resetPassword(mContext, phoneNumber, isDataSuccess -> {
+        });
     }
 
     private boolean checkValidation() {
