@@ -23,6 +23,7 @@ import com.bringit.orders.models.Address;
 import com.bringit.orders.network.Request;
 import com.bringit.orders.services.MyForeGroundService;
 import com.bringit.orders.utils.Constants;
+import com.bringit.orders.utils.Utils;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -164,11 +165,14 @@ public class CurrentFragment extends Fragment {
 
 
     private void addOrder() {
+        binding.addOrder.setEnabled(false);
         Request.getInstance().addOrder(mContext, binding.addOrderCode.getText().toString(),
                 isDataSuccess -> {
                     if (isDataSuccess) startService();
+                    else Utils.openAlertDialog(mContext, "Wrong code entered", "Warning");
                     initOrderList();
                     binding.addOrderCode.setText("");
+                    binding.addOrder.setEnabled(true);
                 });
     }
 

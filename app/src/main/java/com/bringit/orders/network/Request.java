@@ -61,7 +61,7 @@ public class Request {
 
             @Override
             public void onDataError(JSONObject json) {
-//                openAlertMsg(context, json);
+                openAlertMsg(context, json);
                 listener.onDataDone(false);
 
             }
