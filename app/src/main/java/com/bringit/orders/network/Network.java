@@ -55,6 +55,8 @@ public class Network {
     private final String BASE_URL_LOCAL = "http://192.168.5.7:80/bringit_backend/?apiCtrl=deliver&do=";
     private final String BASE_URL_2_LOCAL = "http://192.168.5.7:80/api2/";
 
+    private int netErrorCount = 0;
+
     public enum RequestName {
         LOG_IN, SIGN_UP, CONFIRM_USER,
         RESET_PASSWORD, CONFIRM_RESET_PASSWORD,
@@ -121,7 +123,10 @@ public class Network {
                             listener.onDataDone(response);
                         },
                         error -> {
-                            manageErrors(error, context);
+                            manageErrors(error, context, isRetry -> {
+                                if (isRetry)
+                                    sendRequestObject(requestName, url, context, listener);
+                            });
                             try {
                                 if (error.networkResponse != null)
                                     listener.onDataError(new JSONObject(new String(error.networkResponse.data)));
@@ -192,7 +197,9 @@ public class Network {
                     }
                 }, error -> {
             VolleyLog.e("Error  11: ", error.getMessage());
-            manageErrors(error, context);
+            manageErrors(error, context, isRetry -> {
+                if (isRetry) sendPostRequest(context, params, requestName);
+            });
             //                try {
             //
             //                   listener.onDataError(new JSONObject(new String(error.networkResponse.data)));
@@ -222,9 +229,23 @@ public class Network {
         RequestQueueSingleton.getInstance(context).addToRequestQueue(req);
     }
 
-    private void manageErrors(VolleyError error, Context context) {
-        if (error instanceof TimeoutError || error instanceof NoConnectionError) {
-            Utils.openAlertDialog(context, "בדוק חיבור לאינטרנט", "");
+    private void manageErrors(VolleyError error, Context context, DialogListener listener) {
+        if (error instanceof NoConnectionError) {
+            if (context != null) Utils.openAlertDialog(context, "בדוק חיבור לאינטרנט", "");
+        } else if (error instanceof TimeoutError) {
+            Log.d("error count", netErrorCount + "");
+            netErrorCount++;
+//            if (netErrorCount % 10 == 0) {
+//                Handler handler = new Handler();
+//                handler.postDelayed(() -> listener.onRetry(true), 10 * 1000);
+//                return;
+//            }
+            if (netErrorCount > 100) {
+                netErrorCount = 0;
+                if (context != null)
+                    Utils.openAlertDialog(context, "בדוק חיבור לאינטרנט", "");
+            } else listener.onRetry(true);
+
 
         } else if (error instanceof ParseError) {
             Log.e("parse error", error.toString());
@@ -290,5 +311,9 @@ public class Network {
         void onDataDone(JSONObject json);
 
         void onDataError(JSONObject json);
+    }
+
+    public interface DialogListener {
+        void onRetry(boolean isRetry);
     }
 }
