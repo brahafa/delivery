@@ -5,6 +5,7 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkResponse;
 import com.android.volley.NoConnectionError;
 import com.android.volley.ParseError;
@@ -154,6 +155,12 @@ public class Network {
                         return params;
                     }
                 };
+
+        jsonArrayRequest.setRetryPolicy(new DefaultRetryPolicy(
+                DefaultRetryPolicy.DEFAULT_TIMEOUT_MS * 2,
+                0,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
         RequestQueueSingleton.getInstance(context).addToRequestQueue(jsonArrayRequest);
     }
 
@@ -226,6 +233,12 @@ public class Network {
                 return params;
             }
         };
+
+        req.setRetryPolicy(new DefaultRetryPolicy(
+                DefaultRetryPolicy.DEFAULT_TIMEOUT_MS * 2,
+                0,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
         RequestQueueSingleton.getInstance(context).addToRequestQueue(req);
     }
 
