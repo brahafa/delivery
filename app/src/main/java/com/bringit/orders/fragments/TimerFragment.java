@@ -47,7 +47,6 @@ public class TimerFragment extends Fragment {
         button = (TextView)view.findViewById(R.id.button);
         Log.d("ORDER ID  ", getData(Constants.ID_PREF));
         //sendLocation();
-        ((MainActivity)getActivity()).setBottomNavigationVisibility(1);
 
         UtilityLocation.checkPermission(getActivity());
 

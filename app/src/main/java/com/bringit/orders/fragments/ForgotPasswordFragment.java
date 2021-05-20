@@ -6,13 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
-
-import com.bringit.orders.activities.MainActivity;
 import com.bringit.orders.databinding.FragmentForgotPasswordBinding;
 import com.bringit.orders.network.Request;
 import com.bringit.orders.utils.Constants;
+
+import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 public class ForgotPasswordFragment extends Fragment {
 
@@ -44,8 +43,6 @@ public class ForgotPasswordFragment extends Fragment {
                             }
                         });
         });
-
-        ((MainActivity) getActivity()).setBottomNavigationVisibility(8);
 
         return binding.getRoot();
     }

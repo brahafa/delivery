@@ -5,16 +5,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.bringit.orders.R;
+import com.bringit.orders.databinding.ActivityMainBinding;
+import com.bringit.orders.utils.Constants;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.NavGraph;
 import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
-
-import com.bringit.orders.R;
-import com.bringit.orders.databinding.ActivityMainBinding;
-import com.bringit.orders.utils.Constants;
 
 import static com.bringit.orders.utils.SharedPrefs.getBooleanData;
 import static com.bringit.orders.utils.UtilityLocation.MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE;
@@ -76,11 +76,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void forceCrash(View view) {
         throw new RuntimeException("This is a crash");
-    }
-
-    public void setBottomNavigationVisibility(int visibility) {
-        binding.bottomNavView.setVisibility(visibility);
-        binding.ivMenu.setVisibility(visibility);
     }
 
     private void logUser() {
@@ -153,6 +148,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         switch (requestCode) {
             case MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE: {
 

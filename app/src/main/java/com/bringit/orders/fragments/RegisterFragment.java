@@ -17,12 +17,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
-
-import com.bringit.orders.activities.MainActivity;
 import com.bringit.orders.databinding.FragmentRegisterBinding;
 import com.bringit.orders.models.RegistrationModel;
 import com.bringit.orders.network.Request;
@@ -31,6 +25,11 @@ import com.bringit.orders.utils.Constants;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import static com.bringit.orders.utils.SharedPrefs.getData;
 import static com.bringit.orders.utils.SharedPrefs.saveData;
@@ -76,7 +75,6 @@ public class RegisterFragment extends Fragment {
                 startActivityForResult(cameraIntent, 2);
             }
         });
-        ((MainActivity) getActivity()).setBottomNavigationVisibility(8);
 
         return binding.getRoot();
     }

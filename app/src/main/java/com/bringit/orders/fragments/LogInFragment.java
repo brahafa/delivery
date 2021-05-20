@@ -6,14 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
-
-import com.bringit.orders.activities.MainActivity;
 import com.bringit.orders.databinding.FragmentLogInBinding;
 import com.bringit.orders.network.Request;
 import com.bringit.orders.utils.Constants;
 import com.google.firebase.FirebaseApp;
+
+import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 public class LogInFragment extends Fragment {
 
@@ -71,7 +70,6 @@ public class LogInFragment extends Fragment {
                         .navigate(LogInFragmentDirections.actionLoginFragmentToForgotPasswordFragment(binding.phone.getText().toString()));
             }
         });
-        ((MainActivity) getActivity()).setBottomNavigationVisibility(8);
 
         return binding.getRoot();
     }

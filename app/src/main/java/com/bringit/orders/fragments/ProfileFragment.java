@@ -40,7 +40,6 @@ public class ProfileFragment extends Fragment {
         view=inflater.inflate(R.layout.fragment_profile, container, false);
         initUI();
         ((MainActivity)getActivity()).setTitle("פרטים אישיים");
-        ((MainActivity)getActivity()).setBottomNavigationVisibility(1);
         // Inflate the layout for this fragment
         return view;
     }
