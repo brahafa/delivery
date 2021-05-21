@@ -31,6 +31,26 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tv_title" />
 
+    <View
+        android:background="@drawable/bottom_menu_line"
+        android:id="@+id/v_nav_line"
+        android:layout_height="2dp"
+        android:layout_width="match_parent"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_nav_view" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:background="@android:color/transparent"
+        android:id="@+id/bottom_nav_view"
+        android:layout_gravity="bottom"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        app:elevation="0dp"
+        app:labelVisibilityMode="labeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_nav_menu" />
+
     <fragment
         android:id="@+id/nav_host_fragment"
         android:layout_height="0dp"
@@ -52,27 +72,6 @@
         app:layout_constraintBottom_toTopOf="@id/bottom_nav_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/tv_title" />
-
-    <View
-        android:background="@drawable/bottom_menu_line"
-        android:id="@+id/v_nav_line"
-        android:layout_height="2dp"
-        android:layout_width="match_parent"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_nav_view" />
-
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:background="@android:color/transparent"
-        android:id="@+id/bottom_nav_view"
-        android:layout_gravity="bottom"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        app:elevation="0dp"
-        app:labelVisibilityMode="labeled"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_nav_menu" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
