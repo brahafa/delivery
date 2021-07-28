@@ -247,7 +247,7 @@ public class Request {
 
             @Override
             public void onDataError(JSONObject json) {
-//                openAlertMsg(context, json);
+                openAlertMsg(context, json);
                 listener.onDataDone(false);
 
             }
@@ -368,7 +368,7 @@ public class Request {
 
     private void openAlertMsg(Context context, JSONObject json) {
         try {
-            openAlertDialog(context, json.getString("message"), "");
+            openAlertDialog(context, json.getString("message"), "Warning");
             Log.d("response failed: ", json.toString());
 
         } catch (JSONException e) {
