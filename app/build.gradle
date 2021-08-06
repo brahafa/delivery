@@ -60,7 +60,7 @@ android {
     productFlavors {
         delivery {
             dimension 'default'
-            versionName "27.1.10.0"
+            versionName "27.1.10.0" //prod
         }
     }
 
