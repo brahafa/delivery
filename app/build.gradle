@@ -12,7 +12,7 @@ android {
         applicationId "com.bringit.orders"
         minSdkVersion 16
         targetSdkVersion 30
-        versionCode 25
+        versionCode 27
         versionName "1.0.25"
         ext.enableCrashlytics = false
 
@@ -60,7 +60,7 @@ android {
     productFlavors {
         delivery {
             dimension 'default'
-            versionName "1.0.25.10"
+            versionName "27.1.10.0"
         }
     }
 
